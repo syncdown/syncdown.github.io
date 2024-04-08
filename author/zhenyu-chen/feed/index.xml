@@ -8,11 +8,11 @@
 	>
 
 <channel>
-	<title>Zhenyu Chen &#8211; demo</title>
+	<title>Zhenyu Chen</title>
 	<atom:link href="https://syncdown.github.io/author/zhenyu-chen/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Sun, 07 Apr 2024 03:28:57 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 08 Apr 2024 04:00:19 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -20,6 +20,48 @@
 	1	</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=6.5</generator>
 	<item>
+		<title>技术文章2</title>
+		<link>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a02/</link>
+					<comments>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a02/#comments</comments>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Sun, 07 Apr 2024 10:22:21 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[文章]]></category>
+		<category><![CDATA[颜色]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=20</guid>
+
+					<description><![CDATA[hello]]></description>
+										<content:encoded><![CDATA[
+<p>hello</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a02/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>技术文章1</title>
+		<link>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a01/</link>
+					<comments>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a01/#respond</comments>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Sun, 07 Apr 2024 10:21:23 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[文章]]></category>
+		<category><![CDATA[颜色]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=18</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[]]></content:encoded>
+					
+					<wfw:commentRss>https://syncdown.github.io/%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a01/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>Hello world!</title>
 		<link>https://syncdown.github.io/hello-world/</link>
 					<comments>https://syncdown.github.io/hello-world/#comments</comments>
