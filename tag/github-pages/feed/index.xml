@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/tag/github-pages/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 09 Apr 2024 02:53:22 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 09 Apr 2024 11:18:16 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -20,9 +20,74 @@
 	1	</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=6.5</generator>
 	<item>
+		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站（二）</title>
+		<link>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99-2/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Tue, 09 Apr 2024 11:18:16 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[github pages]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<category><![CDATA[静态博客]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=92</guid>
+
+					<description><![CDATA[上回书我们说到为了实践费曼学习法而用静态方式来搭建wordpress并最终发布。其中的关键就是导出网站前端三剑客，然后将静态文件部署到github.io上。 我们先把github的东西搞定。 创建一个名叫username.github.io的仓库 breakpoint wordpress提供了很多开源的插件， [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>上回书我们说到为了实践费曼学习法而用静态方式来搭建wordpress并最终发布。其中的关键就是导出网站前端三剑客，然后将静态文件部署到github.io上。</p>
+
+
+
+<p>我们先把github的东西搞定。</p>
+
+
+
+<h2 class="wp-block-heading">创建一个名叫username.github.io的仓库</h2>
+
+
+
+<p>breakpoint</p>
+
+
+
+<p>wordpress提供了很多开源的插件， 其中就有导出静态文件需要的插件&#8212;&#8212;Simply Static</p>
+
+
+
+<h2 class="wp-block-heading">安装WP插件Simply Static</h2>
+
+
+
+<p>在wp admin（这是个本地web端的程序），在左侧列表页里面的Plugins按图索骥，一步一步找到Simply Static，找到你就能安装上，别忘记active哈。</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full is-resized"><img fetchpriority="high" decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px" /></figure>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large is-resized"><img decoding="async" width="1024" height="334" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png" alt="" class="wp-image-95" style="width:576px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-300x98.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-768x251.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1536x502.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-2048x669.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+</div>
+
+
+
+<p></p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站（一）</title>
 		<link>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/</link>
-					<comments>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/#respond</comments>
 		
 		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
 		<pubDate>Mon, 08 Apr 2024 14:24:18 +0000</pubDate>
@@ -32,10 +97,14 @@
 		<category><![CDATA[静态博客]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=40</guid>
 
-					<description><![CDATA[本博客建立初衷是为了完成自我学习。也许是我肤浅了，在这个时代写博客就是一种形式的自我学习。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。 既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。 我写我的博客，和你看不看没有太大关系。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。 为什么不用动态，而是采用静态的形式？ 个人博客也分动态和静态，动态就是传wordpress的形式，为什么不用动态而是选择静态的形式呢？ 因为穷，真的。 先说如果是为了进行费曼学习，用notion这样的私人笔记还不够。虽说咱不是为了流量，但是只有公开出来了，才能叫费曼学习实践，是不！。但凡notion能公开某个文件夹，我会分分钟弃疗，舍弃个人博客。 但是为什么说因为穷才选静态方式呢？ 传统的wordpress部署要租赁服务器、购买数据库、购买域名，看看大家常用的aliyun的价格 99一年，原价是956，好像买到就省8百多人民币似的，但是别忘了这还不包括数据库，数据库是大头，而且这系统还不是分布式的（别用keepalived来说事儿哈，那个冷备的东西，和负载均衡级别的高可用根本不是一回事）。如果你要是想换个云平台还挺费劲的，比如从阿里云到腾讯云。 问题的本质我觉得还是穷，要是有钱，我也不介意给我家的鸡笼搞成钻石的。 如果是独立域名还需要备案。我曾经真的因为网站备案去过派出所，虽说这年头去派出所也不是什么大不了的事，不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。 总结，因为穷和懒，我的个人博客和wordpress传统动态方式无缘，溜了溜了。 说了这么多，什么是静态方式呢？ 静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，不过功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对要进行费曼学习实践的我来说，够用了。 [&#8230;]]]></description>
+					<description><![CDATA[本博客建立初衷是为了完成自我学习。 也许是我肤浅吧，我狭隘的认为在这个时代写博客就是自我学习的一种形式。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。 既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p>本博客建立初衷是为了完成自我学习。也许是我肤浅了，在这个时代写博客就是一种形式的自我学习。</p>
+<p>本博客建立初衷是为了完成自我学习。</p>
+
+
+
+<p>也许是我肤浅吧，我狭隘的认为在这个时代写博客就是自我学习的一种形式。</p>
 
 
 
@@ -44,7 +113,7 @@
 
 
 
-<p><strong>我写我的博客，和你看不看没有太大关系</strong>。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。</p>
+<p><strong>我写我的博客，和你看不看没有太大关系</strong>。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。当然公众号另当别论。</p>
 
 
 
@@ -73,7 +142,7 @@
 
 
 <div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
-<figure class="wp-block-image size-large is-resized"><img fetchpriority="high" decoding="async" width="1024" height="409" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-1-1024x409.png" alt="" class="wp-image-42" style="width:398px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-1-1024x409.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1-300x120.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1-768x307.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1.png 1448w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large is-resized"><img decoding="async" width="1024" height="409" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-1-1024x409.png" alt="" class="wp-image-42" style="width:398px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-1-1024x409.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1-300x120.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1-768x307.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-1.png 1448w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -85,7 +154,7 @@
 
 
 
-<p>如果是独立域名还需要备案。我曾经真的因为网站备案去过派出所，虽说这年头去派出所也不是什么大不了的事，不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。</p>
+<p>如果是独立域名还需要备案。我曾经真的因为网站备案去过派出所，虽说这年头去派出所也不是什么大不了的事，不过你得等啊，跟小媳妇似的老老实实地等个把小时，然后特别谦恭的跟民警讲来由、出示证明，想想就觉得生无可恋。话说回来，总之是除了费钱还费劲。总结</p>
 </div></div>
 
 
@@ -100,15 +169,15 @@
 
 
 
-<p>总结，因为穷和懒，我的个人博客和wordpress传统动态方式无缘，溜了溜了。</p>
+<p>因为穷和懒，我的个人博客和wordpress传统动态方式无缘，溜了溜了<img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f3c3-1f3fb-200d-2640-fe0f.png" alt="🏃🏻‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" />。</p>
 
 
 
-<p>说了这么多，什么是静态方式呢？</p>
+<p>说了这么多，什么是静态方式呢<img src="https://s.w.org/images/core/emoji/15.0.3/72x72/2753.png" alt="❓" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
 
 
 
-<p>静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，不过功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对要进行费曼学习实践的我来说，够用了。<br></p>
+<p><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-blue-color">静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（俗称前端三剑客：html、css和javascript），然后想办法把文件发布出去</mark></em>。听上去还是很简单的，不过整体功能就差一些了，好在对要进行费曼学习实践的我来说，够用了<img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f60f.png" alt="😏" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f60f.png" alt="😏" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/15.0.3/72x72/1f60f.png" alt="😏" class="wp-smiley" style="height: 1em; max-height: 1em;" />。<br></p>
 
 
 
@@ -117,7 +186,171 @@
 
 
 
-<h4 class="wp-block-heading">第一步：安装wordpress</h4>
+<h4 class="wp-block-heading">第一步：安装Local WordPress</h4>
+
+
+
+<p>使用具有GUI界面的<a href="https://localwp.com/releases/">Local WP</a>，选择适配你操作系统的版本进行安装。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="667" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-2-1024x667.png" alt="" class="wp-image-65" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-2-1024x667.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-2-300x195.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-2-768x500.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-2-1536x1000.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-2.png 1656w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h4 class="wp-block-heading">第二步：创建本地wordpress网站</h4>
+
+
+
+<ol>
+<li>在local wordpress上点击「create a new site」</li>
+
+
+
+<li>选择创建新站点，继续</li>
+
+
+
+<li>输入网站名称，继续</li>
+
+
+
+<li>如果不清楚你的系统环境设置，直接选择Preferred。虽然是local wordpress，但是它还是会要求系统有nginx和mysql这样的中间件的。</li>
+
+
+
+<li>输入wordpress账户信息，你的新站点将会出现在仪表盘上。</li>
+</ol>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-2 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="522" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1024x522.png" alt="" class="wp-image-68" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1024x522.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-300x153.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-768x391.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1536x783.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5.png 1550w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="486" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-4-1024x486.png" alt="" class="wp-image-67" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-4-1024x486.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-4-300x142.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-4-768x365.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-4-1536x729.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-4.png 1542w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="649" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-7-1024x649.png" alt="" class="wp-image-70" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-7-1024x649.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7-300x190.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7-768x487.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7.png 1410w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="641" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-8-1024x641.png" alt="" class="wp-image-71" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-8-1024x641.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-8-300x188.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-8-768x480.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-8.png 1474w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="647" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-9-1024x647.png" alt="" class="wp-image-72" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-9-1024x647.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-9-300x190.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-9-768x485.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-9.png 1468w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h4 class="wp-block-heading">第三步：编辑本地网站</h4>
+
+
+
+<p>我起的名字叫syncdown，起名的时候github上的用户名syncup被占用了，既然能up就能down，就随便叫syncdown了，寓意同步回滚，回到上个版本。</p>
+
+
+
+<p>然后网站的名字一定要和github的username保持一致，域名就是syncdown.github.io，定了就不变了，名字这种虽然很重要，但是绝对不要后续投入精力。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="456" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-10-1024x456.png" alt="" class="wp-image-73" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-10-1024x456.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-10-300x134.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-10-768x342.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-10-1536x684.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-10-2048x912.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>启动WP Admin，这里需要输入wordpress的账密。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="639" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-11-1024x639.png" alt="" class="wp-image-76" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-11-1024x639.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-11-300x187.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-11-768x479.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-11-1536x958.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-11.png 2046w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>进入网站的admin页面就快进入到内容编辑部分了</p>
+
+
+
+<h5 class="wp-block-heading">编辑网站第一步：选择主题</h5>
+
+
+
+<p>wordpress默认安装了几个主题，其中有twenty twenty系列，今年是2024年，所以出到twenty twenty four了。</p>
+
+
+
+<p>我选择的是cube theme，简单、图文并茂并且规整。</p>
+
+
+
+<p>选择cube的最主要的是我想进行分类，比如个人博客下有技术，生活，旅行这几个分类，每篇post文章的category只设置其中一个，那么在首页就按照第一个category的所有post文章进行展示，也就是说确定了category就会展示当下分类的所有文章</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="532" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-12-1024x532.png" alt="" class="wp-image-77" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-12-1024x532.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-12-300x156.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-12-768x399.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-12-1536x799.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-12-2048x1065.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="645" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-13-1024x645.png" alt="" class="wp-image-79" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-13-1024x645.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-13-300x189.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-13-768x484.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-13-1536x968.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-13-2048x1291.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>这里注意，设置外观Appearance中的menu，一定要勾选「automatically add new top-level pages to this menu 自动将新的顶级页面添加到此菜单」选项</p>
+
+
+
+<p>按照预期，设置好之后它大概长这个样子</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="300" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-14-1024x300.png" alt="" class="wp-image-82" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-14-1024x300.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-14-300x88.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-14-768x225.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-14-1536x450.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-14-2048x599.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h5 class="wp-block-heading">编辑网站第二步：搞定post文章</h5>
+
+
+
+<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:37% auto"><figure class="wp-block-media-text__media"><img loading="lazy" decoding="async" width="1024" height="689" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-16-1024x689.png" alt="" class="wp-image-85 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-16-1024x689.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-16-300x202.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-16-768x517.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-16.png 1046w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure><div class="wp-block-media-text__content">
+<p>创建或者编辑一篇post文章，这里面涉及到很多细节，更多是实践，请自行探索吧。</p>
+
+
+
+<p></p>
+</div></div>
+
+
+
+<p>然后回到wordpress点击open site来看看本地模式下的网站什么样吧。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="236" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-17-1024x236.png" alt="" class="wp-image-87" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-17-1024x236.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-17-300x69.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-17-768x177.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-17-1536x354.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-17-2048x472.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="has-text-align-left"></p>
 
 
 
@@ -128,8 +361,6 @@
 <p></p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/feed/</wfw:commentRss>
-			<slash:comments>0</slash:comments>
 		
 		
 			</item>
