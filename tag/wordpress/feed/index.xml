@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/tag/wordpress/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Mon, 08 Apr 2024 14:27:05 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 09 Apr 2024 02:53:22 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -20,7 +20,7 @@
 	1	</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=6.5</generator>
 	<item>
-		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站</title>
+		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站（一）</title>
 		<link>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/</link>
 					<comments>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/#respond</comments>
 		
@@ -32,19 +32,19 @@
 		<category><![CDATA[静态博客]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=40</guid>
 
-					<description><![CDATA[本博客建立的初衷就是为了完成自我学习。也许是我肤浅了，不过在这个时代，我真是这么想的。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发自己的写作欲或者是进行费曼学习实践。 那既然是这样，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。 我写我的博客，和你看不看没有太大关系。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。 为什么不用动态，而是采用静态的形式？ 因为穷，真的。 先说如果是为了进行费曼学习，用notion这样的私人笔记还不够。虽说咱不是为了流量，但是只有公开出来了，才能叫费曼学习实践。 但是为什么说因为穷才选静态方式呢？ 99一年，原价是956，买到好像就省8百多人民币，但是别忘了这还不包括数据库，数据库是大头，而且这系统还不是分布式的，你要是想换个平台还挺费劲的。我觉得我是真穷啊，做不到眼睛不眨就把这钱花了。 独立域名需要备案，我曾经真的因为网站备案去过派出所，这年头去派出所也不是什么大不了的事。不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。 总结，因为穷和懒，我的个人博客和传统动态方式无缘，溜了溜了。 静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对我来说，够用了。 优点 缺点 成本 动态方式 1. 功能丰富（可支持注册、登录、评论、订阅、支付等）2. 扩展性强（有后台语言加持） 1. 做不到高可用（单机，挂了就挂了）可能是我想多了，人心不足蛇吞象，花这么点钱就想高可用，支持负载均衡和failover 1. 服务器成本2. 数据库成本3. 域名备案4. 平台迁移成本 [&#8230;]]]></description>
+					<description><![CDATA[本博客建立初衷是为了完成自我学习。也许是我肤浅了，在这个时代写博客就是一种形式的自我学习。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。 既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。 我写我的博客，和你看不看没有太大关系。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。 为什么不用动态，而是采用静态的形式？ 个人博客也分动态和静态，动态就是传wordpress的形式，为什么不用动态而是选择静态的形式呢？ 因为穷，真的。 先说如果是为了进行费曼学习，用notion这样的私人笔记还不够。虽说咱不是为了流量，但是只有公开出来了，才能叫费曼学习实践，是不！。但凡notion能公开某个文件夹，我会分分钟弃疗，舍弃个人博客。 但是为什么说因为穷才选静态方式呢？ 传统的wordpress部署要租赁服务器、购买数据库、购买域名，看看大家常用的aliyun的价格 99一年，原价是956，好像买到就省8百多人民币似的，但是别忘了这还不包括数据库，数据库是大头，而且这系统还不是分布式的（别用keepalived来说事儿哈，那个冷备的东西，和负载均衡级别的高可用根本不是一回事）。如果你要是想换个云平台还挺费劲的，比如从阿里云到腾讯云。 问题的本质我觉得还是穷，要是有钱，我也不介意给我家的鸡笼搞成钻石的。 如果是独立域名还需要备案。我曾经真的因为网站备案去过派出所，虽说这年头去派出所也不是什么大不了的事，不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。 总结，因为穷和懒，我的个人博客和wordpress传统动态方式无缘，溜了溜了。 说了这么多，什么是静态方式呢？ 静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，不过功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对要进行费曼学习实践的我来说，够用了。 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p>本博客建立的初衷就是为了完成自我学习。也许是我肤浅了，不过在这个时代，我真是这么想的。</p>
+<p>本博客建立初衷是为了完成自我学习。也许是我肤浅了，在这个时代写博客就是一种形式的自我学习。</p>
 
 
 
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-green-color">简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发自己的写作欲或者是进行费曼学习实践。</mark></strong></p>
-<cite>那既然是这样，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。</cite></blockquote>
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-green-color">简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。</mark></strong></p>
+<cite>既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。</cite></blockquote>
 
 
 
-<p>我写我的博客，和你看不看没有太大关系。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。</p>
+<p><strong>我写我的博客，和你看不看没有太大关系</strong>。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。</p>
 
 
 
@@ -52,15 +52,23 @@
 
 
 
+<p>个人博客也分动态和静态，动态就是传wordpress的形式，为什么不用动态而是选择静态的形式呢？</p>
+
+
+
 <p>因为穷，真的。</p>
 
 
 
-<p>先说如果是为了进行费曼学习，用notion这样的私人笔记还不够。虽说咱不是为了流量，但是只有公开出来了，才能叫费曼学习实践。</p>
+<p>先说如果是为了进行费曼学习，用notion这样的私人笔记还不够。虽说咱不是为了流量，但是只有<strong>公开</strong>出来了，才能叫费曼学习实践，是不！。但凡notion能公开某个文件夹，我会分分钟弃疗，舍弃个人博客。</p>
 
 
 
 <p>但是为什么说因为穷才选静态方式呢？</p>
+
+
+
+<p>传统的wordpress部署要租赁服务器、购买数据库、购买域名，看看大家常用的aliyun的价格</p>
 
 
 
@@ -69,11 +77,15 @@
 
 
 
-<p>99一年，原价是956，买到好像就省8百多人民币，但是别忘了这还不包括数据库，数据库是大头，而且这系统还不是分布式的，你要是想换个平台还挺费劲的。我觉得我是真穷啊，做不到眼睛不眨就把这钱花了。</p>
+<p>99一年，原价是956，好像买到就省8百多人民币似的，但是别忘了这还不包括数据库，数据库是大头，而且这系统还不是分布式的（别用keepalived来说事儿哈，那个冷备的东西，和负载均衡级别的高可用根本不是一回事）。如果你要是想换个云平台还挺费劲的，比如从阿里云到腾讯云。</p>
 
 
 
-<p>独立域名需要备案，我曾经真的因为网站备案去过派出所，这年头去派出所也不是什么大不了的事。不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。</p>
+<p>问题的本质我觉得还是穷，要是有钱，我也不介意给我家的鸡笼搞成钻石的。</p>
+
+
+
+<p>如果是独立域名还需要备案。我曾经真的因为网站备案去过派出所，虽说这年头去派出所也不是什么大不了的事，不过你得等啊，跟小媳妇似的老老实实的等一个多小时，然后特别谦恭的跟民警讲来由、出证明。</p>
 </div></div>
 
 
@@ -88,15 +100,32 @@
 
 
 
-<p>总结，因为穷和懒，我的个人博客和传统动态方式无缘，溜了溜了。</p>
+<p>总结，因为穷和懒，我的个人博客和wordpress传统动态方式无缘，溜了溜了。</p>
 
 
 
-<p>静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对我来说，够用了。</p>
+<p>说了这么多，什么是静态方式呢？</p>
 
 
 
-<figure class="wp-block-table alignleft"><table><tbody><tr><td></td><td>优点</td><td>缺点</td><td class="has-text-align-left" data-align="left">成本</td></tr><tr><td>动态方式</td><td>1. 功能丰富（可支持注册、登录、评论、订阅、支付等）<br>2. 扩展性强（有后台语言加持）</td><td>1. 做不到高可用（单机，挂了就挂了）<br>可能是我想多了，人心不足蛇吞象，花这么点钱就想高可用，支持负载均衡和failover</td><td class="has-text-align-left" data-align="left">1. 服务器成本<br>2. 数据库成本<br>3. 域名备案<br>4. 平台迁移成本<br></td></tr><tr><td>静态方式</td><td>1. 对站长流程简单<br>2. 因为是静态的，所以支持高并发，反正都是平台的CDN来扛。</td><td>1. 功能简单，用户只能阅览不能交互<br>2. 扩展性没有<br>简单来说动态的优点就是静态的缺点</td><td class="has-text-align-left" data-align="left">1. 比私人笔记的成本高</td></tr></tbody></table></figure>
+<p>静态方式就是在本地 wordpress编辑好之后，将博客导出成静态文件（前端三剑客：html、css和javascript），然后想办法把文件发布出去。听上去还是很简单的，不过功能就差一些了，因为是静态所以注册登录支付功能就统统没有了。不过对要进行费曼学习实践的我来说，够用了。<br></p>
+
+
+
+<div class="wptb-table-container wptb-table-54" data-wptb-horizontal-scroll-status="true"><div class="wptb-table-container-matrix" id="wptb-table-id-54" data-wptb-version="1.4.14" data-wptb-pro-status="false"><table class="wptb-preview-table wptb-table-preview-head wptb-element-main-table_setting-1802" data-reconstraction="1" data-wptb-adaptive-table="0" data-wptb-table-tds-sum-max-width="464" data-wptb-cells-width-auto-count="4" style="display: table;" data-table-columns="4" role="table" data-wptb-responsive-directives="eyJyZXNwb25zaXZlRW5hYmxlZCI6dHJ1ZSwicmVzcG9uc2l2ZU1vZGUiOiJhdXRvIiwicHJlc2VydmVSb3dDb2xvciI6ZmFsc2UsInJlbGF0aXZlV2lkdGgiOiJ3aW5kb3ciLCJoZWFkZXJGdWxseU1lcmdlZCI6ZmFsc2UsIm1vZGVPcHRpb25zIjp7ImF1dG8iOnsiZGlzYWJsZWQiOnsiZGVza3RvcCI6ZmFsc2UsInRhYmxldCI6ZmFsc2UsIm1vYmlsZSI6ZmFsc2V9LCJ0b3BSb3dBc0hlYWRlciI6eyJkZXNrdG9wIjpmYWxzZSwidGFibGV0Ijp0cnVlLCJtb2JpbGUiOnRydWV9LCJyZXBlYXRNZXJnZWRIZWFkZXIiOnsiZGVza3RvcCI6dHJ1ZSwidGFibGV0Ijp0cnVlLCJtb2JpbGUiOnRydWV9LCJzdGF0aWNUb3BSb3ciOnsiZGVza3RvcCI6ZmFsc2UsInRhYmxldCI6ZmFsc2UsIm1vYmlsZSI6ZmFsc2V9LCJjZWxsU3RhY2tEaXJlY3Rpb24iOnsiZGVza3RvcCI6InJvdyIsInRhYmxldCI6InJvdyIsIm1vYmlsZSI6InJvdyJ9LCJjZWxsc1BlclJvdyI6eyJkZXNrdG9wIjoxLCJ0YWJsZXQiOjIsIm1vYmlsZSI6MX19fSwiYnJlYWtwb2ludHMiOnsiZGVza3RvcCI6eyJuYW1lIjoiZGVza3RvcCIsIndpZHRoIjoxMDI0fSwidGFibGV0Ijp7Im5hbWUiOiJ0YWJsZXQiLCJ3aWR0aCI6NzAwfSwibW9iaWxlIjp7Im5hbWUiOiJtb2JpbGUiLCJ3aWR0aCI6MzAwfX19" data-wptb-table-directives="eyJpbm5lckJvcmRlcnMiOnsiYWN0aXZlIjoiYWxsIiwiYm9yZGVyV2lkdGgiOiIiLCJib3JkZXJSYWRpdXNlcyI6eyJhbGwiOmZhbHNlfX19" data-wptb-extra-styles="LyogRW50ZXIgeW91ciBjdXN0b20gQ1NTIHJ1bGVzIGhlcmUgKi8=" data-wptb-horizontal-scroll-status="true"><tbody><tr class="wptb-row wptb-table-head" style="background-color: rgb(221, 153, 51);" data-wptb-bg-color="#DD9933"><td class="wptb-cell" data-x-index="0" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-y-index="0" data-sorted-vertical="ask-disabled"><div class="wptb-text-container wptb-ph-element wptb-element-text-2" style="color: rgb(255, 255, 255); font-size: 15px;"><div class="" style="position: relative;"><p style="text-align: center;"><strong>WP&#26041;&#24335;</strong></p><p style="text-align: center;"><strong></strong></p></div></div></td><td class="wptb-cell" data-x-index="1" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-y-index="0" data-sorted-vertical="ask-disabled"><div class="wptb-text-container wptb-ph-element wptb-element-text-3" style="color: rgb(255, 255, 255); font-size: 15px;"><div class="" style="position: relative;"><p>&nbsp;&#20248;&#28857;</p><p></p></div></div></td><td class="wptb-cell" data-x-index="2" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-y-index="0" data-sorted-vertical="ask-disabled"><div class="wptb-text-container wptb-ph-element wptb-element-text-4" style="color: rgb(255, 255, 255); font-size: 15px;"><div class="" style="position: relative;"><p>&#32570;&#28857;</p><p></p></div></div></td><td class="wptb-cell" data-x-index="3" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-y-index="0" data-sorted-vertical="ask-disabled"><div class="wptb-text-container wptb-ph-element wptb-element-text-1" style="color: rgb(255, 255, 255); font-size: 15px;"><div class="" style="position: relative;"><p>&#25104;&#26412;</p><p></p></div></div></td></tr><tr class="wptb-row" data-wptb-bg-color="" style="--hover-bg-color: undefined;"><td class="wptb-cell" data-x-index="0" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Name" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="1"><div class="wptb-text-container wptb-ph-element wptb-element-text-6"><div class="" style="position: relative;"><p>&nbsp;&#21160;&#24577;&#26041;&#24335;</p><p></p></div></div></td><td class="wptb-cell" data-x-index="1" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Position" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="1"><div class="wptb-text-container wptb-ph-element wptb-element-text-9" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#21151;&#33021;&#20016;&#23500;&#65288;&#21487;&#25903;&#25345;&#27880;&#20876;&#12289;&#30331;&#24405;&#12289;&#35780;&#35770;&#12289;&#35746;&#38405;&#12289;&#25903;&#20184;&#31561;&#65289;</p><p></p><p>2. &#25193;&#23637;&#24615;&#24378;&#65288;&#26377;&#21518;&#21488;&#35821;&#35328;&#21152;&#25345;&#65289;</p></div></div></td><td class="wptb-cell" data-x-index="2" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Office" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="1"><div class="wptb-text-container wptb-ph-element wptb-element-text-14" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#20570;&#19981;&#21040;&#39640;&#21487;&#29992;&#65288;&#21333;&#26426;&#65292;&#25346;&#20102;&#23601;&#25346;&#20102;&#65289;</p><p>&#21487;&#33021;&#26159;&#25105;&#24819;&#22810;&#20102;&#65292;&#20154;&#24515;&#19981;&#36275;&#34503;&#21534;&#35937;&#65292;&#33457;&#36825;&#20040;&#28857;&#38065;&#23601;&#24819;&#39640;&#21487;&#29992;&#65292;&#25903;&#25345;&#36127;&#36733;&#22343;&#34913;&#21644;failover</p></div></div></td><td class="wptb-cell" data-x-index="3" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Age" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="1"><div class="wptb-text-container wptb-ph-element wptb-element-text-20" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#20570;&#19981;&#21040;&#39640;&#21487;&#29992;&#65288;&#21333;&#26426;&#65292;&#25346;&#20102;&#23601;&#25346;&#20102;&#65289;</p><p>&#21487;&#33021;&#26159;&#25105;&#24819;&#22810;&#20102;&#65292;&#20154;&#24515;&#19981;&#36275;&#34503;&#21534;&#35937;&#65292;&#33457;&#36825;&#20040;&#28857;&#38065;&#23601;&#24819;&#39640;&#21487;&#29992;&#65292;&#25903;&#25345;&#36127;&#36733;&#22343;&#34913;&#21644;failover</p></div></div></td></tr><tr class="wptb-row" data-wptb-bg-color="" style="--hover-bg-color: undefined;"><td class="wptb-cell" data-x-index="0" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Name" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="2"><div class="wptb-text-container wptb-ph-element wptb-element-text-7" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p style="text-align: center;">&#38745;&#24577;&#26041;&#24335;</p></div></div></td><td class="wptb-cell" data-x-index="1" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Position" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="2"><div class="wptb-text-container wptb-ph-element wptb-element-text-10" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#23545;&#31449;&#38271;&#27969;&#31243;&#31616;&#21333;</p><p>2. &#22240;&#20026;&#26159;&#38745;&#24577;&#30340;&#65292;&#25152;&#20197;&#25903;&#25345;&#39640;&#24182;&#21457;&#65292;&#21453;&#27491;&#37117;&#26159;&#24179;&#21488;&#30340;CDN&#26469;&#25179;&#12290;</p></div></div></td><td class="wptb-cell" data-x-index="2" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Office" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="2"><div class="wptb-text-container wptb-ph-element wptb-element-text-15" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#21151;&#33021;&#31616;&#21333;&#65292;&#29992;&#25143;&#21482;&#33021;&#38405;&#35272;&#19981;&#33021;&#20132;&#20114;</p><p>2. &#25193;&#23637;&#24615;&#27809;&#26377;</p><p>&#31616;&#21333;&#26469;&#35828;&#21160;&#24577;&#30340;&#20248;&#28857;&#23601;&#26159;&#38745;&#24577;&#30340;&#32570;&#28857;</p></div></div></td><td class="wptb-cell" data-x-index="3" data-wptb-css-td-auto-width="true" style="padding: 8px;" data-wptb-title-column="Age" data-wptb-title-column-font-size="" data-wptb-title-column-color="rgb(255, 255, 255)" data-wptb-title-background-color="rgb(221, 153, 51)" data-wptb-title-align="center" data-y-index="2"><div class="wptb-text-container wptb-ph-element wptb-element-text-17" style="color: rgb(0, 0, 0); font-size: 15px;"><div class="" style="position: relative;"><p>1. &#27604;&#31169;&#20154;&#31508;&#35760;&#30340;&#25104;&#26412;&#39640;</p><p></p><p>2. &#27604;wordpress&#21160;&#24577;&#26041;&#24335;&#25104;&#26412;&#20302;&#24456;&#22810;</p></div></div></td></tr></tbody></table></div></div>
+
+
+
+
+<h4 class="wp-block-heading">第一步：安装wordpress</h4>
+
+
+
+<p></p>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99/feed/</wfw:commentRss>
