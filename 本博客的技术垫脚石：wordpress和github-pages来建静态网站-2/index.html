@@ -126,7 +126,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <!-- .featured-image -->
         
         			<div class="entry-meta">
-				<span class="byline"> by: <span class="author vcard"><a class="url fn n" href="https://syncdown.github.io/author/zhenyu-chen/">Zhenyu Chen</a></span></span><span class="posted-on">Posted on: <a href="https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99-2/" rel="bookmark"><time class="entry-date published" datetime="2024-04-09T11:18:16+00:00">April 9, 2024</time><time class="updated" datetime="2024-04-09T14:19:56+00:00">April 9, 2024</time></a></span>			</div>
+				<span class="byline"> by: <span class="author vcard"><a class="url fn n" href="https://syncdown.github.io/author/zhenyu-chen/">Zhenyu Chen</a></span></span><span class="posted-on">Posted on: <a href="https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99-2/" rel="bookmark"><time class="entry-date published" datetime="2024-04-09T11:18:16+00:00">April 9, 2024</time><time class="updated" datetime="2024-04-09T14:59:48+00:00">April 9, 2024</time></a></span>			</div>
 <!-- .entry-meta -->			
 		
 		<div class="entry-container">
@@ -150,7 +150,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 </div>
 <nav><ul class="ez-toc-list ez-toc-list-level-1 ">
 <li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-1" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%90%8D%E5%8F%ABusernamegithubio%E7%9A%84%E4%BB%93%E5%BA%93" title="创建一个名叫username.github.io的仓库">创建一个名叫username.github.io的仓库</a></li>
-<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="#%E5%AE%89%E8%A3%85WP%E6%8F%92%E4%BB%B6Simply_Static" title="安装WP插件Simply Static">安装WP插件Simply Static</a></li>
+<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="#%E8%AE%BE%E7%BD%AErepository%E4%B8%ADgithub_actions%E7%9A%84workflow" title="设置repository中github actions的workflow">设置repository中github actions的workflow</a></li>
+<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="#%E5%AE%89%E8%A3%85WP%E6%8F%92%E4%BB%B6Simply_Static" title="安装WP插件Simply Static">安装WP插件Simply Static</a></li>
 </ul></nav>
 </div>
 <h2 class="wp-block-heading">
@@ -159,7 +160,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 
 
-<p>名字很重要，开始就起好，后面不要变。</p>
+<p><strong>名字很重要，开始就起好，即使没起好后面也不要变。</strong></p>
 
 
 
@@ -167,8 +168,16 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 
 
+<p>切记这个repsitory的可见性要设置成public的，如果设置成private的，会在后续的deploy环节获取不到对应的资源。想想也对，后续的CICD流程触发起来的deploy action会去repository中获取数据，虽然都是github平台的事情，但github action此时就好比一个第三方流程，如果是你的仓库是private的话，肯定获取不到资源的。如同代码包中的类的可见性。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="425" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1024x425.png" alt="" class="wp-image-101" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1024x425.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-300x124.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-768x319.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1536x637.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-2048x849.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
 <ul>
-<li>如果是新创建的repository，记得可见性要设置成public的。</li>
+<li>如果是新创建的repository，没什么好说的，public就好。</li>
 
 
 
@@ -181,7 +190,45 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 
 
-<p>wordpress提供了很多开源的插件， 其中就有导出静态文件需要的插件&#8212;&#8212;Simply Static</p>
+<h2 class="wp-block-heading">
+<span class="ez-toc-section" id="%E8%AE%BE%E7%BD%AErepository%E4%B8%ADgithub_actions%E7%9A%84workflow"></span>设置repository中github actions的workflow<span class="ez-toc-section-end"></span>
+</h2>
+
+
+
+<p>设置repository中github actions的workflow，<strong>说人话</strong>就是，每当repository有代码提交就会触发一个workflow工作流，这个工作流我们要选择deploy部署，也就是把静态资源部署到github的CDN中。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="340" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1024x340.png" alt="" class="wp-image-103" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1024x340.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-300x100.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-768x255.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1536x511.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-2048x681.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="201" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1024x201.png" alt="" class="wp-image-104" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1024x201.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-300x59.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-768x151.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1536x301.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-2048x402.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="466" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1024x466.png" alt="" class="wp-image-105" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1024x466.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-300x137.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-768x349.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1536x699.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-2048x932.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<p>github pages提供了static html的工作流模板，分支默认是main，也就是说main branch的代码提交才会触发这个workflow。不用做任何修改，提交就用。</p>
+
+
+
+<p>本地git clone，然后<strong>记录代码路径后续有用的</strong>。</p>
+
+
+
+<p>做完了github这边的事情，再回来到本地的wordpress。</p>
+
+
+
+<p>既然是wordpress产生的静态文件要部署到githu.io，那就要把静态文件提交到对应的repository。</p>
+
+
+
+<p></p>
 
 
 
@@ -191,13 +238,17 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 
 
+<p>wordpress提供了很多开源的插件， 其中就有导出静态文件需要的插件&#8212;&#8212;Simply Static</p>
+
+
+
 <p>在wp admin（这是个本地web端的程序），在左侧列表页里面的Plugins按图索骥，一步一步找到Simply Static，找到你就能安装上，别忘记active哈。</p>
 
 
 
 <div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-<figure class="wp-block-image size-full is-resized"><img decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px"></figure>
+<figure class="wp-block-image size-full is-resized"><img loading="lazy" decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px"></figure>
 </div>
 
 
@@ -262,7 +313,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 					</h2>                                        					<nav>
 <ul class="ez-toc-list ez-toc-list-level-1 ">
 <li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-1" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%90%8D%E5%8F%ABusernamegithubio%E7%9A%84%E4%BB%93%E5%BA%93" title="创建一个名叫username.github.io的仓库">创建一个名叫username.github.io的仓库</a></li>
-<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="#%E5%AE%89%E8%A3%85WP%E6%8F%92%E4%BB%B6Simply_Static" title="安装WP插件Simply Static">安装WP插件Simply Static</a></li>
+<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="#%E8%AE%BE%E7%BD%AErepository%E4%B8%ADgithub_actions%E7%9A%84workflow" title="设置repository中github actions的workflow">设置repository中github actions的workflow</a></li>
+<li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="#%E5%AE%89%E8%A3%85WP%E6%8F%92%E4%BB%B6Simply_Static" title="安装WP插件Simply Static">安装WP插件Simply Static</a></li>
 </ul></nav>
 </div>
 </section></aside><!-- #secondary -->

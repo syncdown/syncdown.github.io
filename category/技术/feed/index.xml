@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/category/%E6%8A%80%E6%9C%AF/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 09 Apr 2024 14:19:56 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 09 Apr 2024 14:59:48 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -31,7 +31,7 @@
 		<category><![CDATA[静态博客]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=92</guid>
 
-					<description><![CDATA[上回书我们说到为了实践费曼学习法而用静态方式来搭建wordpress并最终发布。其中的关键就是导出网站前端三剑客，然后将静态文件部署到github.io上。 我们先把github的东西搞定。 创建一个名叫username.github.io的仓库 名字很重要，开始就起好，后面不要变。 在github上没抢注到syncup这个username，反其道就叫syncdown，喻义“同步回滚”。repository的名字就叫syncdown.github.io [&#8230;]]]></description>
+					<description><![CDATA[上回书我们说到为了实践费曼学习法而用静态方式来搭建wordpress并最终发布。其中的关键就是导出网站前端三剑客，然后将静态文件部署到github.io上。 我们先把github的东西搞定。 创建一个名叫username.github.io的仓库 名字很重要，开始就起好，即使没起好后面也不要变。 在github上没抢注到syncup这个username，反其道就叫syncdown，喻义“同步回滚”。repository的名字就叫syncdown.github.io [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <p>上回书我们说到为了实践费曼学习法而用静态方式来搭建wordpress并最终发布。其中的关键就是导出网站前端三剑客，然后将静态文件部署到github.io上。</p>
 
@@ -45,7 +45,7 @@
 
 
 
-<p>名字很重要，开始就起好，后面不要变。</p>
+<p><strong>名字很重要，开始就起好，即使没起好后面也不要变。</strong></p>
 
 
 
@@ -53,8 +53,16 @@
 
 
 
+<p>切记这个repsitory的可见性要设置成public的，如果设置成private的，会在后续的deploy环节获取不到对应的资源。想想也对，后续的CICD流程触发起来的deploy action会去repository中获取数据，虽然都是github平台的事情，但github action此时就好比一个第三方流程，如果是你的仓库是private的话，肯定获取不到资源的。如同代码包中的类的可见性。</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="425" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1024x425.png" alt="" class="wp-image-101" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1024x425.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-300x124.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-768x319.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-1536x637.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-21-2048x849.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
 <ul>
-<li>如果是新创建的repository，记得可见性要设置成public的。</li>
+<li>如果是新创建的repository，没什么好说的，public就好。</li>
 
 
 
@@ -63,15 +71,55 @@
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="558" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1024x558.png" alt="" class="wp-image-98" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1024x558.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-300x163.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-768x418.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1536x837.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20.png 1950w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="558" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1024x558.png" alt="" class="wp-image-98" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1024x558.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-300x163.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-768x418.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20-1536x837.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-20.png 1950w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
-<p>wordpress提供了很多开源的插件， 其中就有导出静态文件需要的插件&#8212;&#8212;Simply Static</p>
+<h2 class="wp-block-heading">设置repository中github actions的workflow</h2>
+
+
+
+<p>设置repository中github actions的workflow，<strong>说人话</strong>就是，每当repository有代码提交就会触发一个workflow工作流，这个工作流我们要选择deploy部署，也就是把静态资源部署到github的CDN中。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="340" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1024x340.png" alt="" class="wp-image-103" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1024x340.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-300x100.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-768x255.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-1536x511.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-23-2048x681.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="201" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1024x201.png" alt="" class="wp-image-104" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1024x201.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-300x59.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-768x151.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-1536x301.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-24-2048x402.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="466" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1024x466.png" alt="" class="wp-image-105" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1024x466.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-300x137.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-768x349.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-1536x699.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-25-2048x932.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>github pages提供了static html的工作流模板，分支默认是main，也就是说main branch的代码提交才会触发这个workflow。不用做任何修改，提交就用。</p>
+
+
+
+<p>本地git clone，然后<strong>记录代码路径后续有用的</strong>。</p>
+
+
+
+<p>做完了github这边的事情，再回来到本地的wordpress。</p>
+
+
+
+<p>既然是wordpress产生的静态文件要部署到githu.io，那就要把静态文件提交到对应的repository。</p>
+
+
+
+<p></p>
 
 
 
 <h2 class="wp-block-heading">安装WP插件Simply Static</h2>
+
+
+
+<p>wordpress提供了很多开源的插件， 其中就有导出静态文件需要的插件&#8212;&#8212;Simply Static</p>
 
 
 
@@ -81,13 +129,13 @@
 
 <div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-<figure class="wp-block-image size-full is-resized"><img decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px" /></figure>
+<figure class="wp-block-image size-full is-resized"><img loading="lazy" decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px" /></figure>
 </div>
 
 
 
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-<figure class="wp-block-image size-large is-resized"><img decoding="async" width="1024" height="334" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png" alt="" class="wp-image-95" style="width:576px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-300x98.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-768x251.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1536x502.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-2048x669.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large is-resized"><img loading="lazy" decoding="async" width="1024" height="334" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png" alt="" class="wp-image-95" style="width:576px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1024x334.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-300x98.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-768x251.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-1536x502.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-19-2048x669.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 </div>
 </div>
 
