@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/tag/wordpress/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Wed, 10 Apr 2024 09:26:40 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 10 Apr 2024 09:36:18 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -224,7 +224,7 @@
 		<category><![CDATA[静态博客]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=40</guid>
 
-					<description><![CDATA[本博客建立初衷是为了完成自我学习。 也许是我肤浅吧，我狭隘的认为在这个时代写博客就是自我学习的一种形式。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。 既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。 [&#8230;]]]></description>
+					<description><![CDATA[本博客建立初衷是为了完成自我学习。 也许是我肤浅吧，我狭隘的认为在这个时代写博客就是自我学习的一种形式。 简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。 当我看看到一个高产的博主长年累月经营自己的blog，但是平均每篇博客只有四五百的PV，我沉默了也更坚定了这个说法。 既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
 <p>本博客建立初衷是为了完成自我学习。</p>
@@ -236,11 +236,15 @@
 
 
 <p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-green-color">简单的个人博客并不是用来给别人看的，仅仅是作者本人用来抒发写作欲或者是进行费曼学习实践。</mark></strong></p>
+
+
+
+<p>当我看看到一个高产的博主长年累月经营自己的blog，但是平均每篇博客只有四五百的PV，我沉默了也更坚定了这个说法。</p>
 <cite>既然如此，评论功能、登录或者花里胡哨的一些功能都没有必要喽，也不需要nginx+mysql，仅仅是静态static html页面似乎也能满足需求。不但省下了租服务器的成本，也免去国内备案的繁琐。</cite></blockquote>
 
 
 
-<p><strong><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-blue-color">我写我的博客，和你看不看没有太大关系</mark></em></strong>。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。当然公众号另当别论，公众号写文章对于我这种非营销类型的有种社死的感觉，而且公众号的内容特别容易被wx审核掉，比如科学上网、国外手机卡等等</p>
+<p><strong><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-blue-color">我写我的博客，和你看不看没有太大关系</mark></em></strong>。在如今流量为王的年代，如果是为了搏君一键三连，那就不是博客形式了，而是短视频的形式。当然公众号另当别论，公众号写文章对于我这种非营销类型的人来说有种社死的感觉，而且公众号的内容特别容易被wx审核掉，比如话题涉及科学上网、国外手机卡等等</p>
 
 
 
@@ -248,15 +252,15 @@
 
 
 
-<h4 class="wp-block-heading">为什么不用动态，而是采用静态的形式？</h4>
+<h4 class="wp-block-heading">个人博客为什么不用动态，而是采用静态的形式？</h4>
 
 
 
-<p>个人博客也分动态和静态，动态就是传统wordpress的形式（nginx+php+mysql），为什么不用动态而是选择静态的形式呢？因为<strong>穷</strong>，真的。</p>
+<p>个人博客可以分成动态和静态两种形式，动态就是传统wordpress的（nginx+php+mysql），为什么不用动态而是选择静态的形式呢？因为<strong>穷</strong>，真的┓( ´∀` )┏。</p>
 
 
 
-<p>先说如果是为了进行费曼学习，用notion这样的私人笔记可能还不够。虽说咱不是为了流量，但只有<strong>公开</strong>出来了，才能叫费曼学习实践，是不？。但凡notion能公开某个文件夹，我会分分钟弃疗，舍弃个人博客。</p>
+<p>如果是为了进行费曼学习，用notion这样的私人笔记可能不行。虽说咱不是为了流量，但只有自己的内容<strong>公开</strong>出来了，才能叫费曼学习实践，是不？。但凡notion能公开某个文件夹，我会分分钟弃疗，舍弃个人博客。</p>
 
 
 
@@ -264,7 +268,7 @@
 
 
 
-<p>传统的wordpress部署要租赁服务器、购买数据库、购买域名，看看大家常用的阿里云价格</p>
+<p>传统的wordpress动态方式，部署要租赁服务器、购买数据库、购买域名，看看大家常用的阿里云价格</p>
 
 
 
