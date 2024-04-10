@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/tag/wordpress/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 09 Apr 2024 14:59:48 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 10 Apr 2024 02:47:51 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5</generator>
+	<generator>https://wordpress.org/?v=6.5.2</generator>
 	<item>
 		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站（二）</title>
 		<link>https://syncdown.github.io/%e6%9c%ac%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%8a%80%e6%9c%af%e5%9e%ab%e8%84%9a%e7%9f%b3%ef%bc%9awordpress%e5%92%8cgithub-pages%e6%9d%a5%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e7%ab%99-2/</link>
@@ -99,19 +99,15 @@
 
 
 
-<p>本地git clone，然后<strong>记录代码路径后续有用的</strong>。</p>
+<p>本地git clone，然后<strong>记录代码路径后续有用的</strong>，为了好表示就暂且搞成<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">~/code/syncdown.github.io</mark></p>
 
 
 
-<p>做完了github这边的事情，再回来到本地的wordpress。</p>
+<p>做完了github这边的事情，再回来到wordpress。</p>
 
 
 
-<p>既然是wordpress产生的静态文件要部署到githu.io，那就要把静态文件提交到对应的repository。</p>
-
-
-
-<p></p>
+<p>既然是wordpress产生的静态文件要部署到github.io，那就要把静态文件导出到<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">~/code/syncdown.github.io</mark>。</p>
 
 
 
@@ -123,7 +119,7 @@
 
 
 
-<p>在wp admin（这是个本地web端的程序），在左侧列表页里面的Plugins按图索骥，一步一步找到Simply Static，找到你就能安装上，别忘记active哈。</p>
+<p>在wp admin左侧列表页里面的Plugins按图索骥，一步一步找到Simply Static，找到就能安装上，然后别忘记active。</p>
 
 
 
@@ -141,7 +137,63 @@
 
 
 
-<p></p>
+<h2 class="wp-block-heading">配置Simply Static</h2>
+
+
+
+<p>安装好这个插件之后，在wordpress的admin管理页面对应的网站就是当前的syncdown了。</p>
+
+
+
+<p>replacing urls选择绝对路径，填写好你的username.github.io</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="588" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-26-1024x588.png" alt="" class="wp-image-116" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-26-1024x588.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-26-300x172.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-26-768x441.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-26-1536x882.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-26-2048x1177.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>在deploy部署一项中，路径写刚刚git clone到本地的<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">~/code/syncdown.github.io</mark></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="501" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-27-1024x501.png" alt="" class="wp-image-117" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-27-1024x501.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-27-300x147.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-27-768x375.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-27-1536x751.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-27-2048x1001.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">用Simply Static导出到本地github触发提交</h2>
+
+
+
+<p>配置都已经好了，就放心大胆的导出静态文件吧。按照预期静态文件会导出到本地的github</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="480" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-28-1024x480.png" alt="" class="wp-image-118" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-28-1024x480.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-28-300x141.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-28-768x360.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-28-1536x720.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-28-2048x961.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>之后大胆的git push触发github workflow，如果顺利的话在github用户页面中可以查看到此次build的信息。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="505" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-29-1024x505.png" alt="" class="wp-image-119" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-29-1024x505.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-29-300x148.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-29-768x379.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-29-1536x757.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-29-2048x1010.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>至此最核心的几个流程都已经描述完了，最后打开你的username.github.io来检查一下吧。</p>
+
+
+
+<h4 class="wp-block-heading">如何设置文章的头图</h4>
+
+
+
+<p>文章的头图可能会带给用户aha时刻，对运营同学而言是至关重要的一步，不过这个文章的头图设置还是很难找的，如下</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://syncdown.github.io/wp-content/uploads/2024/04/Filmage-2024-04-10_100412.mp4"></video></figure>
 
 
 
@@ -149,7 +201,8 @@
 ]]></content:encoded>
 					
 		
-		
+		<enclosure url="https://syncdown.github.io/wp-content/uploads/2024/04/Filmage-2024-04-10_100412.mp4" length="3711840" type="video/mp4" />
+
 			</item>
 		<item>
 		<title>本博客的技术垫脚石：wordpress和github pages来建静态网站（一）</title>
