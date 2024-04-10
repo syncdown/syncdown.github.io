@@ -38,7 +38,6 @@ jobs:
         with:
           # Upload entire repository
           path: "."
-      # 测试是否会少一个workflow
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
