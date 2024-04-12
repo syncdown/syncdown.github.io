@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/tag/apple/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Thu, 11 Apr 2024 10:49:35 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 12 Apr 2024 02:53:17 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -83,7 +83,15 @@
 
 
 
-<p>回过头来看这个事情还挺有趣的，我承认自己的账号管理方面有问题、比较薄弱，但这个不是我想说的重点。而是苹果这套生态系统，正常情况下app需要AppleID登录的情况下从AppStore下载，但是同一<strong>设备的AppleID即便更换了，之前下载的app是仍旧可以继续使用的</strong>，这个怎么说呢，用户体验也挺好的。只是在mac电脑上，登录过很多AppleID的话，是不能知晓当前app是哪个AppleID下载的。</p>
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="404" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1024x404.png" alt="" class="wp-image-153" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1024x404.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-300x118.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-768x303.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1536x606.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35.png 1658w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>回过头来看这个事情还挺有趣的，我承认自己的账号管理方面有问题、比较薄弱，但这个不是我想说的重点。而是苹果这套生态系统，如果我有多个账号， 而曾经购买并订阅了这个app的账号目前恰好不用了呢？凑巧账号绑定的是信用卡支付，岂不是意味着账单出具的时候才会发现这笔付款！</p>
+
+
+
+<p>正常情况下app需要AppleID登录的情况下从AppStore下载，但是同一<strong>设备的AppleID即便更换了，之前下载的app是仍旧可以继续使用的</strong>，这个怎么说呢，用户体验也挺好的。只是在mac电脑上，登录过很多AppleID的话，是不能知晓当前app是哪个AppleID下载的。</p>
 
 
 
@@ -95,7 +103,7 @@
 
 
 
-<figure class="wp-block-image size-full is-resized"><img decoding="async" width="680" height="624" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png" alt="" class="wp-image-148" style="width:252px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png 680w, https://syncdown.github.io/wp-content/uploads/2024/04/image-34-300x275.png 300w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
+<figure class="wp-block-image size-full is-resized"><img loading="lazy" decoding="async" width="680" height="624" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png" alt="" class="wp-image-148" style="width:252px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png 680w, https://syncdown.github.io/wp-content/uploads/2024/04/image-34-300x275.png 300w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
 
 
 
@@ -121,6 +129,10 @@
 
 
 
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="609" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png" alt="" class="wp-image-141" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-300x178.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-768x457.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31.png 1382w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
 <p>想象一下，假如a账号目前没有登录在任何设备上，碰到今天扣款的问题，我肯定就不能这么快查到。我大概会这么查</p>
 
 
@@ -141,11 +153,15 @@
 
 
 
-<p>那如果我有<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">上百</mark>个账号呢。。。┓(&nbsp;´∀`&nbsp;)┏。。。</p>
+<p>那如果我有<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">上百</mark>个账号呢。。。┓( ´∀` )┏。。。</p>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="609" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png" alt="" class="wp-image-141" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-300x178.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-768x457.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31.png 1382w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<p></p>
+
+
+
+<p></p>
 
 
 

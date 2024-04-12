@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/author/zhenyu-chen/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Thu, 11 Apr 2024 10:49:35 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 12 Apr 2024 10:41:32 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,45 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>retool查询Mongodb Atlas</title>
+		<link>https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Fri, 12 Apr 2024 10:41:32 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[mongodb]]></category>
+		<category><![CDATA[retool]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=155</guid>
+
+					<description><![CDATA[Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 几分钟这俩就可以拼凑出一个简单的数据查询页面。 未完待续]]></description>
+										<content:encoded><![CDATA[
+<p></p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="757" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png" alt="" class="wp-image-156" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 </p>
+
+
+
+<p>几分钟这俩就可以拼凑出一个简单的数据查询页面。</p>
+
+
+
+<p>未完待续</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>多账号就要承受账号管理的风险</title>
 		<link>https://syncdown.github.io/%e5%a4%9a%e8%b4%a6%e5%8f%b7%e5%b0%b1%e8%a6%81%e6%89%bf%e5%8f%97%e8%b4%a6%e5%8f%b7%e7%ae%a1%e7%90%86%e7%9a%84%e9%a3%8e%e9%99%a9/</link>
 		
@@ -39,7 +78,7 @@
 
 					<description><![CDATA[早上刚醒就发现微信半夜推送的支付通知：一笔98元的扣费 瞬间清醒，起床气加成。 凌晨3点47啊 尼玛，这个时候大多数人都在睡觉吧。我花钱了？干啥了？ 显示是apple相关的，在手机app [&#8230;]]]></description>
 										<content:encoded><![CDATA[
-<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media"><img fetchpriority="high" decoding="async" width="536" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png" alt="" class="wp-image-142 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png 536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-157x300.png 157w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-768x1468.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-804x1536.png 804w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32.png 830w" sizes="(max-width: 536px) 100vw, 536px" /></figure><div class="wp-block-media-text__content">
+<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media"><img decoding="async" width="536" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png" alt="" class="wp-image-142 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png 536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-157x300.png 157w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-768x1468.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-804x1536.png 804w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32.png 830w" sizes="(max-width: 536px) 100vw, 536px" /></figure><div class="wp-block-media-text__content">
 <p class="has-regular-font-size">早上刚醒就发现微信半夜推送的支付通知：一笔98元的扣费</p>
 
 
@@ -83,7 +122,15 @@
 
 
 
-<p>回过头来看这个事情还挺有趣的，我承认自己的账号管理方面有问题、比较薄弱，但这个不是我想说的重点。而是苹果这套生态系统，正常情况下app需要AppleID登录的情况下从AppStore下载，但是同一<strong>设备的AppleID即便更换了，之前下载的app是仍旧可以继续使用的</strong>，这个怎么说呢，用户体验也挺好的。只是在mac电脑上，登录过很多AppleID的话，是不能知晓当前app是哪个AppleID下载的。</p>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="404" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1024x404.png" alt="" class="wp-image-153" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1024x404.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-300x118.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-768x303.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35-1536x606.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-35.png 1658w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>回过头来看这个事情还挺有趣的，我承认自己的账号管理方面有问题、比较薄弱，但这个不是我想说的重点。而是苹果这套生态系统，如果我有多个账号， 而曾经购买并订阅了这个app的账号目前恰好不用了呢？凑巧账号绑定的是信用卡支付，岂不是意味着账单出具的时候才会发现这笔付款！</p>
+
+
+
+<p>正常情况下app需要AppleID登录的情况下从AppStore下载，但是同一<strong>设备的AppleID即便更换了，之前下载的app是仍旧可以继续使用的</strong>，这个怎么说呢，用户体验也挺好的。只是在mac电脑上，登录过很多AppleID的话，是不能知晓当前app是哪个AppleID下载的。</p>
 
 
 
@@ -95,7 +142,7 @@
 
 
 
-<figure class="wp-block-image size-full is-resized"><img decoding="async" width="680" height="624" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png" alt="" class="wp-image-148" style="width:252px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png 680w, https://syncdown.github.io/wp-content/uploads/2024/04/image-34-300x275.png 300w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
+<figure class="wp-block-image size-full is-resized"><img loading="lazy" decoding="async" width="680" height="624" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png" alt="" class="wp-image-148" style="width:252px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-34.png 680w, https://syncdown.github.io/wp-content/uploads/2024/04/image-34-300x275.png 300w" sizes="(max-width: 680px) 100vw, 680px" /></figure>
 
 
 
@@ -121,6 +168,10 @@
 
 
 
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="609" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png" alt="" class="wp-image-141" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-300x178.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-768x457.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31.png 1382w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
 <p>想象一下，假如a账号目前没有登录在任何设备上，碰到今天扣款的问题，我肯定就不能这么快查到。我大概会这么查</p>
 
 
@@ -141,11 +192,15 @@
 
 
 
-<p>那如果我有<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">上百</mark>个账号呢。。。┓(&nbsp;´∀`&nbsp;)┏。。。</p>
+<p>那如果我有<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-orange-color">上百</mark>个账号呢。。。┓( ´∀` )┏。。。</p>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="609" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png" alt="" class="wp-image-141" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-31-1024x609.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-300x178.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31-768x457.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-31.png 1382w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<p></p>
+
+
+
+<p></p>
 
 
 

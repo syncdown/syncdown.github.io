@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>retool</title>
+	<atom:link href="https://syncdown.github.io/tag/retool/feed/" rel="self" type="application/rss+xml" />
+	<link>https://syncdown.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 12 Apr 2024 10:41:32 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.5.2</generator>
+
+<image>
+	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
+	<title>retool</title>
+	<link>https://syncdown.github.io/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>retool查询Mongodb Atlas</title>
+		<link>https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Fri, 12 Apr 2024 10:41:32 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[mongodb]]></category>
+		<category><![CDATA[retool]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=155</guid>
+
+					<description><![CDATA[Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 几分钟这俩就可以拼凑出一个简单的数据查询页面。 未完待续]]></description>
+										<content:encoded><![CDATA[
+<p></p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="757" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png" alt="" class="wp-image-156" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 </p>
+
+
+
+<p>几分钟这俩就可以拼凑出一个简单的数据查询页面。</p>
+
+
+
+<p>未完待续</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
