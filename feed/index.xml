@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Fri, 12 Apr 2024 10:41:32 +0000</lastBuildDate>
+	<lastBuildDate>Sun, 02 Jun 2024 04:12:30 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5.2</generator>
+	<generator>https://wordpress.org/?v=6.5.3</generator>
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
@@ -28,6 +28,304 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>GPT-Sovits使用</title>
+		<link>https://syncdown.github.io/gpt-sovits%e4%bd%93%e9%aa%8c/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Thu, 18 Apr 2024 11:19:53 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[TTS]]></category>
+		<category><![CDATA[声音克隆]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=158</guid>
+
+					<description><![CDATA[AI时代，要是不搞点人工智能方面的东西，作为技术人员碰面了都不好意思跟人打交道。当然之前也零星搞过一些皮毛，但是时间一长就忘记了。 自诩天生对声音敏感，那么AGI就从声音开始进行记录吧。AI和声音相关的有很多，如果是生成的话，主要分TTS（文本转语音）和RVC（声音转声音），本文的重点就是TTS，目前当红炸子鸡就是https://github.com/RVC-Boss/GPT-SoVITS 为什么叫GPT-Sovits？ GPT是生成式预训练变换器的缩写，show for [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>AI时代，要是不搞点人工智能方面的东西，作为技术人员碰面了都不好意思跟人打交道。当然之前也零星搞过一些皮毛，但是时间一长就忘记了。</p>
+
+
+
+<p>自诩天生对声音敏感，那么AGI就从声音开始进行记录吧。AI和声音相关的有很多，如果是生成的话，主要分TTS（文本转语音）和RVC（声音转声音），本文的重点就是TTS，目前当红炸子鸡就是<a href="https://github.com/RVC-Boss/GPT-SoVITS">https://github.com/RVC-Boss/GPT-SoVITS</a> </p>
+
+
+
+<h4 class="wp-block-heading">为什么叫GPT-Sovits？</h4>
+
+
+
+<p>GPT是生成式预训练变换器的缩写，show for Generative Pre-trained Transformer，并不是openai公司的专属。Sovits本身是中国本土的歌声合成爱好者Rcell基于VITS、soft-vc、VISinger2等项目开发的开源程序，不知为何他删除了自己的仓库，后来由svc-develop-team这个账号进行维护。</p>
+
+
+
+<p>而我们今天的主角RVC-Boss（B站的名字叫花儿不哭）就是借鉴了Sovits和GPT，所以名字就叫GPT-Sovits，看来人家起的名字还是挺贴切的。另外花儿不哭和Rcell是因为RVC项目而结识的，据说他们灵魂讨论了不下百次。</p>
+
+
+
+<p>Sovits的项目地址<a href="https://github.com/svc-develop-team/so-vits-svc">https://github.com/svc-develop-team/so-vits-svc</a> 不过现在已经是存档的状态了（只读）</p>
+
+
+
+<h4 class="wp-block-heading">GPT-Sovits有啥用？</h4>
+
+
+
+<ul>
+<li>短时声音样本，对外宣传是5秒钟的声音即可。</li>
+
+
+
+<li>训练时间短，1分钟即可完成训练。其实整个过程分十多步，即便单独把训练单独拎出来说，也不是1分钟就能完成的。尤其是GPT模型的训练。话说回来，还是要肯定这个项目的，起码比闭源的字节跳动要敞亮多了。
+<ul>
+<li>语音切分</li>
+
+
+
+<li>语音降噪</li>
+
+
+
+<li>ASR</li>
+
+
+
+<li>语音文本标注</li>
+
+
+
+<li>文本获取</li>
+
+
+
+<li>自监督特征提取</li>
+
+
+
+<li>音色token提取</li>
+
+
+
+<li>Sovits模型训练</li>
+
+
+
+<li>GPT模型训练</li>
+
+
+
+<li>推理：选择好Sovits模型和GPT模型</li>
+</ul>
+</li>
+
+
+
+<li>语言支持英日中，实际推理过程中如果出现中英混杂的情况，可能会崩掉</li>
+
+
+
+<li></li>
+</ul>
+
+
+
+<p>注意，作者说<strong>在 Mac 上使用 GPU 训练的模型效果显著低于其他设备训练的模型，所以我们暂时使用CPU进行训练。</strong></p>
+
+
+
+<p>应该是笔误，说的是只使用CPU进行训练，怪不得说慢呢。</p>
+
+
+
+<p>即便如此，目前能找到的声音样本少，效果好的就是GPT-Sovits项目，非常良心。</p>
+
+
+
+<h4 class="wp-block-heading">GPT-Sovits的安装</h4>
+
+
+
+<ol>
+<li><code>xcode-select --install</code>&nbsp;安装 Xcode command-line tools</li>
+
+
+
+<li><code>brew install ffmpeg</code>&nbsp;或&nbsp;<code>conda install ffmpeg</code>&nbsp;安装 FFmpeg</li>
+
+
+
+<li>conda里面安装依赖
+<ul>
+<li>conda create -n GPTSoVits python=3.9</li>
+
+
+
+<li>conda activate GPTSoVits</li>
+
+
+
+<li>pip install -r requirements.txt 或者python3.9 -m pip install -r requirements.txt</li>
+</ul>
+</li>
+
+
+
+<li>下载模型&nbsp;<a href="https://huggingface.co/lj1995/GPT-SoVITS">GPT-SoVITS Models</a>&nbsp;下载预训练模型，并将它们放置在&nbsp; 项目目录\<code>GPT_SoVITS\pretrained_models</code></li>
+</ol>
+
+
+
+<h4 class="wp-block-heading">GPT-Sovits的启动</h4>
+
+
+
+<p>没什么好说的， python webui.py就是启动命令</p>
+
+
+
+<h4 class="wp-block-heading">另一种方式：Docker compose启动方式（不推荐，尝试一下就好）</h4>
+
+
+
+<ol>
+<li>修改docker-compser.yaml </li>
+</ol>
+
+
+
+<p>因为我的电脑是mac的， 由于m1的GPU存在内存泄露的情况， 所以不用GPU训练，devices: [] 写成空list，不然会报错，说什么reservations.devices必须是list列表形式。</p>
+
+
+
+<p>因为电脑是arm64架构的， 配置内容和image平级的， 添加一个platform: linux/arm64配置项</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="439" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png" alt="" class="wp-image-165" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-300x129.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-768x329.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37.png 1484w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>不过目前还没有arm64架构的image</p>
+
+
+
+<p>2. docker compose -f docker-compose.yaml up -d</p>
+
+
+
+<p>但是没想到压根就没有arm64平台的</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="81" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png" alt="" class="wp-image-166" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-300x24.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-768x61.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1536x121.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-2048x162.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>算了， 配置项里面删除掉platform，再试试看。</p>
+
+
+
+<p>倒是能启动了， 也能训练，就是推理页面打不开，并且页面的打开要靠手动输入地址。比如初始页面，标注页面等等，页面UI也没有做中文本地化。</p>
+
+
+
+<p>看完Docker Compose这部分，还是建议不要使用这种方式了。</p>
+
+
+
+<h4 class="wp-block-heading">模型训练</h4>
+
+
+
+<p>语音包就是datasets，第一步就是对训练数据做一些预处理</p>
+
+
+
+<p>1、人声分离（optional）</p>
+
+
+
+<p>尽量找高质量的干音，训练数据的质量越好最终的效果也就越好。如果实在是找不到UVR人声分离就派上用场了。</p>
+
+
+
+<p>2、语音切分</p>
+
+
+
+<p>将路径下的所有文件按照统一的制式进行切割，具体里面涉及很多参数细节，默认就好</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="484" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png" alt="" class="wp-image-169" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-300x142.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-768x363.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1536x726.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-2048x968.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>3、语音降噪（optional）</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="129" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-40-1024x129.png" alt="" class="wp-image-170" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-40-1024x129.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-40-300x38.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-40-768x97.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-40-1536x194.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-40-2048x258.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>4、ASR</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="411" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-41-1024x411.png" alt="" class="wp-image-171" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-41-1024x411.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-41-300x120.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-41-768x308.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-41-1536x616.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-41-2048x821.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>要填写输入路径，ASR完成后需要进行人工校验，填写.list文件路径之后勾选「是否开启打标webui」，然后程序会单独新开一个tab窗口，校对好之后提交更改，其实最后是对.list文件进行了修改。</p>
+
+
+
+<p>5、训练集格式化</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="611" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-42-1024x611.png" alt="" class="wp-image-172" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-42-1024x611.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-42-300x179.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-42-768x458.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-42-1536x916.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-42-2048x1222.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>以mac m2为例， 没必要填写GPU卡</p>
+
+
+
+<p>6、 模型训练</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="582" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-43-1024x582.png" alt="" class="wp-image-173" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-43-1024x582.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-43-300x170.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-43-768x436.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-43-1536x872.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-43-2048x1163.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>7、 推理</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="389" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-44-1024x389.png" alt="" class="wp-image-174" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-44-1024x389.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-44-300x114.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-44-768x292.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-44-1536x584.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-44-2048x778.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>选择两个模型，都在一个实验下。 </p>
+
+
+
+<p>勾选「是否开启TTS推理WebUI」，程序会帮你打开9872这个端口的页面，然后就可以开始推理了。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="623" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-45-1024x623.png" alt="" class="wp-image-175" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-45-1024x623.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-45-300x183.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-45-768x467.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-45-1536x935.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-45-2048x1246.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>retool查询Mongodb Atlas</title>
 		<link>https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/</link>
 		
@@ -44,7 +342,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="757" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png" alt="" class="wp-image-156" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="757" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png" alt="" class="wp-image-156" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -78,7 +376,7 @@
 
 					<description><![CDATA[早上刚醒就发现微信半夜推送的支付通知：一笔98元的扣费 瞬间清醒，起床气加成。 凌晨3点47啊 尼玛，这个时候大多数人都在睡觉吧。我花钱了？干啥了？ 显示是apple相关的，在手机app [&#8230;]]]></description>
 										<content:encoded><![CDATA[
-<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media"><img decoding="async" width="536" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png" alt="" class="wp-image-142 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png 536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-157x300.png 157w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-768x1468.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-804x1536.png 804w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32.png 830w" sizes="(max-width: 536px) 100vw, 536px" /></figure><div class="wp-block-media-text__content">
+<div class="wp-block-media-text is-stacked-on-mobile" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media"><img loading="lazy" decoding="async" width="536" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png" alt="" class="wp-image-142 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-32-536x1024.png 536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-157x300.png 157w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-768x1468.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32-804x1536.png 804w, https://syncdown.github.io/wp-content/uploads/2024/04/image-32.png 830w" sizes="(max-width: 536px) 100vw, 536px" /></figure><div class="wp-block-media-text__content">
 <p class="has-regular-font-size">早上刚醒就发现微信半夜推送的支付通知：一笔98元的扣费</p>
 
 
@@ -104,7 +402,7 @@
 
 
 
-<div class="wp-block-media-text is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img decoding="async" width="858" height="780" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-33.png" alt="" class="wp-image-143 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-33.png 858w, https://syncdown.github.io/wp-content/uploads/2024/04/image-33-300x273.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-33-768x698.png 768w" sizes="(max-width: 858px) 100vw, 858px" /></figure><div class="wp-block-media-text__content">
+<div class="wp-block-media-text is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img loading="lazy" decoding="async" width="858" height="780" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-33.png" alt="" class="wp-image-143 size-full" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-33.png 858w, https://syncdown.github.io/wp-content/uploads/2024/04/image-33-300x273.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-33-768x698.png 768w" sizes="(max-width: 858px) 100vw, 858px" /></figure><div class="wp-block-media-text__content">
 <p>时间对的上。。。</p>
 
 
