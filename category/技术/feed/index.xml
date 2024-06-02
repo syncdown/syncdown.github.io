@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/category/%E6%8A%80%E6%9C%AF/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Sun, 02 Jun 2024 04:12:30 +0000</lastBuildDate>
+	<lastBuildDate>Sun, 02 Jun 2024 06:59:45 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,64 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>多个github账号的写入</title>
+		<link>https://syncdown.github.io/%e5%a4%9a%e4%b8%aagithub%e8%b4%a6%e5%8f%b7%e7%9a%84%e5%86%99%e5%85%a5/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Sun, 02 Jun 2024 06:59:45 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[git]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=179</guid>
+
+					<description><![CDATA[不排除一个用户有多个github账号的情况，当进行remote repository的写入的时候，很可能会因为多个github账号而导致push失败的情况。 比如，我有两个github账号， 一个叫tigbox，一个叫syncdown。ssh-keygen -t [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>不排除一个用户有多个github账号的情况，当进行remote repository的写入的时候，很可能会因为多个github账号而导致push失败的情况。 </p>
+
+
+
+<p>比如，我有两个github账号， 一个叫tigbox，一个叫syncdown。ssh-keygen -t rsa分别生成了各自的公私密钥对。默认全局的是tigbox，毕竟~/.ssh/id_rsa就是tigbox账号的。</p>
+
+
+
+<p>git clone了syncdown.github.io是没有问题的， 因为这个repository是public的，谁都可以读取。</p>
+
+
+
+<p>但是在提交的时候， 就出现了如下的问题，显示premission denied to tigbox。</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="171" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png" alt="" class="wp-image-181" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-300x50.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-768x128.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image.png 1344w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>这么看，就清晰多了。syncdown的repository在提交的时候发现是tigbox的github账号，经典的跑偏啊，而跑偏最初始的原因就是因为默认是~/.ssh/id_rsa，那似乎如何引导鉴权程序去使用syncdown的ssh key file就是关键，ssh key file ->github 账号 </p>
+
+
+
+<p>编辑~/.ssh/config文件， 把它搞成大概下面的样子。就是两个账号的管理，主要是依靠IdentityFile进行区分的</p>
+
+
+
+<figure class="wp-block-image size-full"><img decoding="async" width="804" height="462" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png" alt="" class="wp-image-183" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png 804w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-300x172.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-768x441.png 768w" sizes="(max-width: 804px) 100vw, 804px" /></figure>
+
+
+
+<p>回到当前的本地的repository目录，查看并添加ssh IdentityFile</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="131" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png" alt="" class="wp-image-185" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-300x38.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-768x98.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>之后就能顺利的进行提交了，毕竟通过IdentityFile已经能区分出github的账号。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>GPT-Sovits使用</title>
 		<link>https://syncdown.github.io/gpt-sovits%e4%bd%93%e9%aa%8c/</link>
 		
@@ -199,7 +257,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="439" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png" alt="" class="wp-image-165" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-300x129.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-768x329.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37.png 1484w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="439" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png" alt="" class="wp-image-165" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-37-1024x439.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-300x129.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37-768x329.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-37.png 1484w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -215,7 +273,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="81" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png" alt="" class="wp-image-166" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-300x24.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-768x61.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1536x121.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-2048x162.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="81" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png" alt="" class="wp-image-166" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1024x81.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-300x24.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-768x61.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-1536x121.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-38-2048x162.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -255,7 +313,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="484" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png" alt="" class="wp-image-169" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-300x142.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-768x363.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1536x726.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-2048x968.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="484" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png" alt="" class="wp-image-169" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1024x484.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-300x142.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-768x363.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-1536x726.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-39-2048x968.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
