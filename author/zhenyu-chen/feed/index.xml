@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/author/zhenyu-chen/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Sun, 02 Jun 2024 06:59:45 +0000</lastBuildDate>
+	<lastBuildDate>Sun, 02 Jun 2024 09:33:21 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,103 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>golang中的深拷贝</title>
+		<link>https://syncdown.github.io/golang%e4%b8%ad%e7%9a%84%e6%b7%b1%e6%8b%b7%e8%b4%9d/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Sun, 02 Jun 2024 09:32:51 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[golang]]></category>
+		<category><![CDATA[深拷贝]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=187</guid>
+
+					<description><![CDATA[相信大家都有过这样的经历，打印和复印。为了更节约成本，会先打印一份，然后把这份纸质文稿再复印几份。 打印很像原型实例化的过程，而复印特别像原型拷贝的过程。 区别就在于，对于某些语言比如java，如果是原型实例化的过程可能很耗时，而拥有一个实例把它作为模板进行拷贝，这个过程可能既简单又快速。 测试文件 反思之前也有项目需要不断进行实例化的，如果是分布式的话就不得不进行类似于json的encode [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>相信大家都有过这样的经历，打印和复印。为了更节约成本，会先打印一份，然后把这份纸质文稿再复印几份。</p>
+
+
+
+<p>打印很像<strong>原型实例化的过程</strong>，而复印特别像<strong>原型拷贝的过程</strong>。</p>
+
+
+
+<p>区别就在于，对于某些语言比如java，如果是原型实例化的过程可能很耗时，而拥有一个实例把它作为模板进行拷贝，这个过程可能既简单又快速。</p>
+
+
+
+<pre class="wp-block-code"><code>package Solution
+
+type Person struct {
+	Name string
+	Age  int
+}
+
+func deepCopy(src Person) Person {
+	return Person{Name: src.Name, Age: src.Age}
+}
+</code></pre>
+
+
+
+<p>测试文件</p>
+
+
+
+<pre class="wp-block-code"><code>package Solution
+
+import (
+	"fmt"
+	"reflect"
+	"runtime"
+	"strings"
+	"testing"
+	"unsafe"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/stretchr/testify/assert"
+)
+
+type SolutionFuncType func(Person) Person
+
+var SolutionFuncTypeList = &#91;]SolutionFuncType{
+	deepCopy,
+}
+
+type Case struct {
+	caseName string
+	input    Person
+}
+
+var cases = &#91;]Case{
+	{"normal", Person{Name: "mike", Age: 10}},
+}
+
+func TestDeepCopy(t *testing.T) {
+	ast := assert.New(t)
+
+	for _, f := range SolutionFuncTypeList {
+		funcName := strings.Split(runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), ".")&#91;1]
+		for _, c := range cases {
+			t.Run(fmt.Sprintf("%s %s", funcName, c.caseName), func(t *testing.T) {
+				output := f(c.input)
+				spew.Dump(&amp;c.input, &amp;output)
+				ast.Equal(c.input, output, "func:%s case:%s", funcName, c.caseName)
+				ast.NotEqual(unsafe.Pointer(&amp;c.input), unsafe.Pointer(&amp;output))
+			})
+		}
+	}
+}
+</code></pre>
+
+
+
+<p>反思之前也有项目需要不断进行实例化的，如果是分布式的话就不得不进行类似于json的encode decode的过程。如果是单机的话，就会是直接从原型进行实例化，而很少进行原型的拷贝。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>多个github账号的写入</title>
 		<link>https://syncdown.github.io/%e5%a4%9a%e4%b8%aagithub%e8%b4%a6%e5%8f%b7%e7%9a%84%e5%86%99%e5%85%a5/</link>
 		
