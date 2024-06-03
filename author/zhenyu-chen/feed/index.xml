@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/author/zhenyu-chen/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Sun, 02 Jun 2024 09:33:21 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 03 Jun 2024 13:28:47 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -38,31 +38,24 @@
 		<category><![CDATA[深拷贝]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=187</guid>
 
-					<description><![CDATA[相信大家都有过这样的经历，打印和复印。为了更节约成本，会先打印一份，然后把这份纸质文稿再复印几份。 打印很像原型实例化的过程，而复印特别像原型拷贝的过程。 区别就在于，对于某些语言比如java，如果是原型实例化的过程可能很耗时，而拥有一个实例把它作为模板进行拷贝，这个过程可能既简单又快速。 测试文件 反思之前也有项目需要不断进行实例化的，如果是分布式的话就不得不进行类似于json的encode [&#8230;]]]></description>
+					<description><![CDATA[相信大家都有过这样的经历，打印和复印。为了更节约成本，会先打印一份，然后把这份纸质文稿再复印几份。 打印很像原型实例化的过程(from struct)，而复印特别像原型拷贝的过程(from seed instant)。 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <p>相信大家都有过这样的经历，打印和复印。为了更节约成本，会先打印一份，然后把这份纸质文稿再复印几份。</p>
 
 
 
-<p>打印很像<strong>原型实例化的过程</strong>，而复印特别像<strong>原型拷贝的过程</strong>。</p>
+<p>打印很像<strong>原型实例化的过程</strong>(from struct)，而复印特别像<strong>原型拷贝的过程</strong>(from seed instant)。</p>
 
 
 
-<p>区别就在于，对于某些语言比如java，如果是原型实例化的过程可能很耗时，而拥有一个实例把它作为模板进行拷贝，这个过程可能既简单又快速。</p>
+<p>区别就在于，对于某些语言比如java，如果是原型实例化的过程可能很耗时，而拥有一个实例把它作为种子或者模板进行拷贝，这个过程可能既简单又快速。</p>
 
 
 
-<pre class="wp-block-code"><code>package Solution
-
-type Person struct {
-	Name string
-	Age  int
-}
-
-func deepCopy(src Person) Person {
+<pre class="wp-block-code"><code>// golang这门语言的赋值都是值传递，如果结构中不含指针，那么直接复制就是深拷贝
+func DeepCopy(src Person) Person {
 	return Person{Name: src.Name, Age: src.Age}
-}
-</code></pre>
+}</code></pre>
 
 
 
@@ -84,10 +77,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type SolutionFuncType func(Person) Person
+type SolutionFuncType func(src Person) Person
 
 var SolutionFuncTypeList = &#91;]SolutionFuncType{
-	deepCopy,
+	DeepCopy,
 }
 
 type Case struct {
@@ -104,13 +97,23 @@ func TestDeepCopy(t *testing.T) {
 
 	for _, f := range SolutionFuncTypeList {
 		funcName := strings.Split(runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), ".")&#91;1]
+		spew.Dump(funcName)
 		for _, c := range cases {
 			t.Run(fmt.Sprintf("%s %s", funcName, c.caseName), func(t *testing.T) {
 				output := f(c.input)
-				spew.Dump(&amp;c.input, &amp;output)
 				ast.Equal(c.input, output, "func:%s case:%s", funcName, c.caseName)
 				ast.NotEqual(unsafe.Pointer(&amp;c.input), unsafe.Pointer(&amp;output))
 			})
+		}
+	}
+}
+func BenchmarkDeepCopy(b *testing.B) {
+	for _, f := range SolutionFuncTypeList {
+		// funcName := strings.Split(runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), ".")&#91;1]
+		for _, c := range cases {
+			for n := 0; n &lt; b.N; n++ {
+				f(c.input)
+			}
 		}
 	}
 }
@@ -118,7 +121,191 @@ func TestDeepCopy(t *testing.T) {
 
 
 
-<p>反思之前也有项目需要不断进行实例化的，如果是分布式的话就不得不进行类似于json的encode decode的过程。如果是单机的话，就会是直接从原型进行实例化，而很少进行原型的拷贝。</p>
+<p>反思之前也有项目需要不断进行实例化的，如果是分布式的话就不得不进行类似于json的encode decode的过程。如果是单机的话，就会是直接从原型进行实例化，而很少利用已有的instant进行拷贝。</p>
+
+
+
+<p>而利用已有的instant进行拷贝有两种方式，一种是encode decode，一种是自定义的。就是针对自定义的struct的指针字段，赋值的代码细粒度到具体的子字段，也不复杂。</p>
+
+
+
+<pre class="wp-block-code"><code>type Person struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
+type ParentInfo struct {
+	Father string `json:"father"`
+	Mother string `json:"mother"`
+}
+
+type PersonWithPointer struct {
+	Person                // anonymous field
+	ParentInfo ParentInfo `json:"parent_info"`
+}
+
+func DeepCopyPersonWithPointer(src PersonWithPointer) PersonWithPointer {
+	dst := PersonWithPointer{}
+	dst.Age = src.Age
+	dst.Name = src.Name
+
+	parentInfo := ParentInfo{Father: src.ParentInfo.Father, Mother: src.ParentInfo.Mother}
+	dst.ParentInfo = parentInfo
+	return dst
+}
+
+func DeepCopyPersonWithPointerByJson(src PersonWithPointer) PersonWithPointer {
+	dst := PersonWithPointer{}
+	bytes, err := json.Marshal(src)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(bytes, &amp;dst)
+	if err != nil {
+		panic(err)
+	}
+	return dst
+}</code></pre>
+
+
+
+<p>对应的测试代码</p>
+
+
+
+<pre class="wp-block-code"><code>type SolutionFuncType1 func(src PersonWithPointer) PersonWithPointer
+
+var SolutionFuncTypeList1 = &#91;]SolutionFuncType1{
+	DeepCopyPersonWithPointer,
+	DeepCopyPersonWithPointerByJson,
+}
+
+type Case1 struct {
+	caseName string
+	input    PersonWithPointer
+}
+
+var cases1 = &#91;]Case1{
+	{"normal", PersonWithPointer{Person: Person{Name: "zhangsan", Age: 20}, ParentInfo: ParentInfo{Father: "zhanger", Mother: "wanglili"}}},
+}
+
+func TestDeepCopyWithPointer(t *testing.T) {
+	ast := assert.New(t)
+
+	for _, f := range SolutionFuncTypeList1 {
+		funcName := strings.Split(runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), ".")&#91;1]
+		for _, c := range cases1 {
+			t.Run(fmt.Sprintf("%s %s", funcName, c.caseName), func(t *testing.T) {
+				output := f(c.input)
+				ast.Equal(c.input, output, "func:%s case:%s", funcName, c.caseName)
+				ast.NotEqual(unsafe.Pointer(&amp;c.input), unsafe.Pointer(&amp;output))
+			})
+		}
+	}
+}</code></pre>
+
+
+
+<p>既然利用已有的instant有两种方式， 那么到底是encode decode这种快，还是自定义的快呢？benchmark一下看看。</p>
+
+
+
+<pre class="wp-block-code"><code>type Person struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
+type ParentInfo struct {
+	Father string `json:"father"`
+	Mother string `json:"mother"`
+}
+
+type PersonWithPointer struct {
+	Person                // anonymous field
+	ParentInfo ParentInfo `json:"parent_info"`
+}
+
+// 如果是自定义的结构而且其中字段包含指针类型，可以用自定义拷贝的方式
+func DeepCopyPersonWithPointer(src PersonWithPointer) PersonWithPointer {
+	dst := PersonWithPointer{}
+	dst.Age = src.Age
+	dst.Name = src.Name
+
+	parentInfo := ParentInfo{Father: src.ParentInfo.Father, Mother: src.ParentInfo.Mother}
+	dst.ParentInfo = parentInfo
+	return dst
+}
+
+func DeepCopyPersonWithPointerByJson(src PersonWithPointer) PersonWithPointer {
+	dst := PersonWithPointer{}
+	bytes, err := json.Marshal(src)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(bytes, &amp;dst)
+	if err != nil {
+		panic(err)
+	}
+	return dst
+}</code></pre>
+
+
+
+<p>benchmark测试代码</p>
+
+
+
+<pre class="wp-block-code"><code>func BenchmarkDeepCopyWithPointer(b *testing.B) {
+	for _, c := range cases1 {
+		for n := 0; n &lt; b.N; n++ {
+			DeepCopyPersonWithPointer(c.input)
+		}
+	}
+
+}
+
+func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
+	for _, c := range cases1 {
+		for n := 0; n &lt; b.N; n++ {
+			DeepCopyPersonWithPointerByJson(c.input)
+		}
+	}
+
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="212" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png" alt="" class="wp-image-194" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-300x62.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-768x159.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1536x319.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3.png 1572w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>执行的时候运行 go test -bench=被测试方法前缀。</p>
+
+
+
+<p>从性能上看，从已有的instant进行深拷贝，用自定义的方法比json encode decode要了三个数量级，当然我使用的struct比较简单，如果是复杂一些的真实业务的场景，可能相差的性能会更大。</p>
+
+
+
+<p>结论：</p>
+
+
+
+<ol>
+<li>复制有两种方式，一种是基于struct结构，一种是基于已有的instant把它作为种子进行拷贝</li>
+
+
+
+<li>golang复制默认就是值传递</li>
+
+
+
+<li>自定义的struct如果有指针类型，用自制的深拷贝的方法，要对指针的子字段进行赋值</li>
+
+
+
+<li>相对于encode decode的深拷贝，自制的方法性能会更好</li>
+</ol>
 ]]></content:encoded>
 					
 		
@@ -152,7 +339,7 @@ func TestDeepCopy(t *testing.T) {
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="171" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png" alt="" class="wp-image-181" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-300x50.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-768x128.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image.png 1344w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="171" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png" alt="" class="wp-image-181" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-300x50.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-768x128.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image.png 1344w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -172,7 +359,7 @@ func TestDeepCopy(t *testing.T) {
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="131" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png" alt="" class="wp-image-185" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-300x38.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-768x98.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="131" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png" alt="" class="wp-image-185" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-2-1024x131.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-300x38.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2-768x98.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-2.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
