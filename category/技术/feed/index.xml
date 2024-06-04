@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/category/%E6%8A%80%E6%9C%AF/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 04 Jun 2024 03:28:00 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 04 Jun 2024 04:32:36 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -279,6 +279,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 		<pubDate>Sun, 02 Jun 2024 06:59:45 +0000</pubDate>
 				<category><![CDATA[技术]]></category>
 		<category><![CDATA[git]]></category>
+		<category><![CDATA[ssh]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=179</guid>
 
 					<description><![CDATA[不排除一个用户有多个github账号的情况，当进行remote repository的写入的时候，很可能会因为多个github账号而导致push失败的情况。 比如，我有两个github账号， 一个叫tigbox，一个叫syncdown。ssh-keygen -t [&#8230;]]]></description>

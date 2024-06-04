@@ -8,8 +8,8 @@
 	>
 
 <channel>
-	<title>git</title>
-	<atom:link href="https://syncdown.github.io/tag/git/feed/" rel="self" type="application/rss+xml" />
+	<title>ssh</title>
+	<atom:link href="https://syncdown.github.io/tag/ssh/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
 	<lastBuildDate>Tue, 04 Jun 2024 04:32:36 +0000</lastBuildDate>
@@ -22,7 +22,7 @@
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
-	<title>git</title>
+	<title>ssh</title>
 	<link>https://syncdown.github.io/</link>
 	<width>32</width>
 	<height>32</height>
