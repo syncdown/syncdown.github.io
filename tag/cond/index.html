@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<title>mongodb</title>
+	<title>cond</title>
 <meta name="robots" content="max-image-preview:large">
 <link rel="alternate" type="application/rss+xml" title=" &raquo; Feed" href="https://syncdown.github.io/feed/">
 <link rel="alternate" type="application/rss+xml" title=" &raquo; Comments Feed" href="https://syncdown.github.io/comments/feed/">
-<link rel="alternate" type="application/rss+xml" title=" &raquo; mongodb Tag Feed" href="https://syncdown.github.io/tag/mongodb/feed/">
+<link rel="alternate" type="application/rss+xml" title=" &raquo; cond Tag Feed" href="https://syncdown.github.io/tag/cond/feed/">
 <script type="text/javascript">
 /* <![CDATA[ */
 window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/syncdown.github.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.5.4"}};
@@ -130,7 +130,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <script type="text/javascript" src="https://syncdown.github.io/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
 <script type="text/javascript" src="https://syncdown.github.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
 <link rel="https://api.w.org/" href="https://syncdown.github.io/wp-json/">
-<link rel="alternate" type="application/json" href="https://syncdown.github.io/wp-json/wp/v2/tags/15">
+<link rel="alternate" type="application/json" href="https://syncdown.github.io/wp-json/wp/v2/tags/24">
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://syncdown.github.io/xmlrpc.php?rsd">
 <meta name="generator" content="WordPress 6.5.4">
 <meta name="cdp-version" content="1.4.6">		<style type="text/css">.site-title,
@@ -145,7 +145,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <meta name="msapplication-TileImage" content="https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-300x300.png">
 </head>
 
-<body class="archive tag tag-mongodb tag-15 hfeed has-sidebar no-sidebar">
+<body class="archive tag tag-cond tag-24 hfeed has-sidebar no-sidebar">
 
 
 <div id="page" class="site">
@@ -199,31 +199,24 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 		<main id="main" class="site-main">					
 			<div class="blog-archive columns-3 clear">
 									
-<article id="post-155" class="post-155 post type-post status-publish format-standard has-post-thumbnail hentry category-4 tag-mongodb tag-retool">
+<article id="post-212" class="post-212 post type-post status-publish format-standard hentry category-4 tag-cond tag-golang">
 	<div class="blog-post-item">
-					<div class="featured-image">
-				
-		<a class="post-thumbnail" href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" aria-hidden="true" tabindex="-1">
-			<img width="1432" height="1058" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="retool查询Mongodb Atlas" decoding="async" fetchpriority="high" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w" sizes="(max-width: 1432px) 100vw, 1432px">		</a>
-
-					</div>
-<!-- .featured-image -->
 		        
         <div class="entry-container">
 			<span class="cat-links"><a href="https://syncdown.github.io/category/%e6%8a%80%e6%9c%af/" rel="category tag">技术</a></span>
 			<header class="entry-header">
-				<h2 class="entry-title"><a href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" rel="bookmark">retool查询Mongodb Atlas</a></h2>			</header><!-- .entry-header -->
+				<h2 class="entry-title"><a href="https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/" rel="bookmark">golang并发中的cond</a></h2>			</header><!-- .entry-header -->
 
-			<span class="posted-on">Posted on: <a href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" rel="bookmark"><time class="entry-date published updated" datetime="2024-04-12T10:41:32+00:00">April 12, 2024</time></a></span>
+			<span class="posted-on">Posted on: <a href="https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/" rel="bookmark"><time class="entry-date published" datetime="2024-06-11T06:29:06+00:00">June 11, 2024</time><time class="updated" datetime="2024-06-13T12:45:11+00:00">June 13, 2024</time></a></span>
 							<div class="entry-content">
-					<p>Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 几分钟这俩就可以拼凑出一个简单的数据查询页面。 未完待续</p>
+					<p>概览 cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意信号。 用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。 使用场景的区别 [&hellip;]</p>
 				</div>
 <!-- .entry-content -->
 					</div>
 <!-- .entry-container -->
 	</div>
 <!-- .blog-post-item -->
-</article><!-- #post-155 -->			</div>
+</article><!-- #post-212 -->			</div>
 <!-- .blog-archive -->
 
 					</main><!-- #main -->

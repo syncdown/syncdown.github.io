@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/author/zhenyu-chen/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 04 Jun 2024 04:32:36 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 13 Jun 2024 12:45:11 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5.3</generator>
+	<generator>https://wordpress.org/?v=6.5.4</generator>
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
@@ -28,6 +28,261 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>golang并发中的cond</title>
+		<link>https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Tue, 11 Jun 2024 06:29:06 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[cond]]></category>
+		<category><![CDATA[golang]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=212</guid>
+
+					<description><![CDATA[概览 cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意信号。 用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。 使用场景的区别 [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="has-larger-font-size">概览</p>
+
+
+
+<p>cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
+
+
+
+<p>event就是两个或两个以上的goroutine之间的任意信号。</p>
+
+
+
+<p>用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。</p>
+
+
+
+<p>使用场景的区别</p>
+
+
+
+<ul>
+<li>waitgroup：赛马等待发令枪</li>
+
+
+
+<li>cond:多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个</li>
+</ul>
+
+
+
+<p class="has-larger-font-size">cond中的Wait和Broadcast</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var shared = false
+
+func main() {
+	wg := sync.WaitGroup{}
+	// 构造cond对象，需要关联一把锁
+	c := sync.NewCond(&amp;sync.Mutex{})
+
+	// 两辆车在等红灯（两个协程读取共享变量）
+	for i := 0; i &lt; 2; i++ {
+		wg.Add(1)
+		go func(i int) {
+			c.L.Lock()
+			// 红灯的情况
+			// for !share{ 用for还是if，其实窦性，关键的是c.Wait()
+			if !shared {
+				fmt.Printf("time:%v goroutine %v wait\n", time.Now(), i)
+				c.Wait()
+			}
+			// 绿灯的情况
+			fmt.Printf("time:%v goroutine %v shared:%v\n", time.Now(), i, shared)
+			c.L.Unlock()
+			wg.Done()
+		}(i)
+	}
+
+	// 管理红绿灯的控制程序
+	time.Sleep(time.Second * 2)
+	c.L.Lock()
+	fmt.Printf("time:%v goroutine main ready\n", time.Now())
+	shared = true
+	c.Broadcast()
+	fmt.Printf("time:%v goroutine main broadcast\n", time.Now())
+	c.L.Unlock()
+
+	// 让main这个子弹飞一会，不然会直接退出
+	wg.Wait()
+
+}
+</pre>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="178" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png" alt="" class="wp-image-214" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-300x52.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-768x133.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4.png 1508w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p><strong>两辆车一先一后在单行道上等待红灯，绿灯亮起后，先后读取到通行信号出发。</strong></p>
+
+
+
+<p>小结：</p>
+
+
+
+<ul>
+<li>cond需要关联一把锁，可以是Mutex也可是RWMutex</li>
+
+
+
+<li>不论是车还是红灯管理程序，读写共享变量都需要针对条件锁里面关联</li>
+
+
+
+<li>cond的Wait()，#车要等待</li>
+
+
+
+<li>cond的Broadcast() #红灯管理程序要广播，让车辆看得见。</li>
+</ul>
+
+
+
+<p class="has-larger-font-size">cond中的Wait和Signal</p>
+
+
+
+<p>场景类比，单个窗口的派对，协程通过共享变量的读取竞争来获得执行权，谁先得到谁执行。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var shared = false
+
+func main() {
+	wg := sync.WaitGroup{}
+	c := sync.NewCond(&amp;sync.Mutex{})
+	for i := 0; i &lt; 2; i++ {
+		wg.Add(1)
+		go func(i int) {
+			c.L.Lock()
+			for !shared {
+				fmt.Printf("time:%v goroutine %v wait\n", time.Now(), i)
+				c.Wait()
+			}
+			fmt.Printf("time:%v goroutine %v shared:%v\n", time.Now(), i, shared)
+			c.L.Unlock()
+			wg.Done()
+		}(i)
+	}
+
+	for i := 0; i &lt; 2; i++ {
+		time.Sleep(time.Second * 2)
+		c.L.Lock()
+		fmt.Printf("time:%v main goroutine %v ready\n ", time.Now(), i)
+		shared = true
+		c.Signal()
+		fmt.Printf("time:%v main goroutine %v signal\n", time.Now(), i)
+		c.L.Unlock()
+	}
+
+	wg.Wait()
+}
+</pre>
+
+
+
+<p>结果</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="241" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png" alt="" class="wp-image-217" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-300x70.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-768x180.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5.png 1456w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>当监听的对象是队列的时候</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func main() {
+	c := sync.NewCond(&amp;sync.Mutex{})
+	// 长度为零，容量为10的切片
+	queue := make([]interface{}, 0, 10)
+
+	addToQueue := func() {
+		var i int
+		for {
+			c.L.Lock()
+			// 队列大于等于3的时候就会停住，只要小于3写入队列就会很快 #快入#
+			for len(queue) >= 3 {
+				fmt.Printf("the size of queue is %d\n", len(queue))
+				c.Wait()
+			}
+			fmt.Printf("Add to queue by %v\n", i)
+			queue = append(queue, i)
+			c.L.Unlock()
+			c.Signal()
+			i++
+		}
+	}
+
+	removeFromQueue := func(delay time.Duration) {
+		for {
+			time.Sleep(delay)
+			c.L.Lock()
+			removed := queue[0]
+			queue = queue[1:]
+			fmt.Printf("Removed %v from queue\n", removed)
+			c.L.Unlock()
+			c.Signal()
+		}
+	}
+
+	// 队列大于等于3的时候就会停住，只要小于3写入队列就会很快 #快入#
+	go addToQueue()
+
+	// 间隔一秒移除队列一项 #慢出#
+	go removeFromQueue(1 * time.Second)
+
+	var ch chan struct{}
+	&lt;-ch
+}
+</pre>
+
+
+
+<figure class="wp-block-image size-full"><img decoding="async" width="918" height="490" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png" alt="" class="wp-image-222" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png 918w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-300x160.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-768x410.png 768w" sizes="(max-width: 918px) 100vw, 918px" /></figure>
+
+
+
+<p>因为队列是快入慢出的， 并且以3为阈值，大于等于3就停止写入。所以开始很快的写入队列三个数据，后来只能走一个进一个。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>golang中的深拷贝</title>
 		<link>https://syncdown.github.io/golang%e4%b8%ad%e7%9a%84%e6%b7%b1%e6%8b%b7%e8%b4%9d/</link>
 		
@@ -227,7 +482,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="212" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png" alt="" class="wp-image-194" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-300x62.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-768x159.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1536x319.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3.png 1572w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="212" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png" alt="" class="wp-image-194" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1024x212.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-300x62.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-768x159.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3-1536x319.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-3.png 1572w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -300,7 +555,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="171" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png" alt="" class="wp-image-181" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-300x50.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-768x128.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image.png 1344w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="171" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png" alt="" class="wp-image-181" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1024x171.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-300x50.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-768x128.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image.png 1344w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -312,7 +567,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<figure class="wp-block-image size-full"><img decoding="async" width="804" height="462" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png" alt="" class="wp-image-183" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png 804w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-300x172.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-768x441.png 768w" sizes="(max-width: 804px) 100vw, 804px" /></figure>
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="804" height="462" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png" alt="" class="wp-image-183" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-1.png 804w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-300x172.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-1-768x441.png 768w" sizes="(max-width: 804px) 100vw, 804px" /></figure>
 
 
 

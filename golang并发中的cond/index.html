@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<title>mongodb</title>
+	<title>golang并发中的cond</title>
 <meta name="robots" content="max-image-preview:large">
 <link rel="alternate" type="application/rss+xml" title=" &raquo; Feed" href="https://syncdown.github.io/feed/">
 <link rel="alternate" type="application/rss+xml" title=" &raquo; Comments Feed" href="https://syncdown.github.io/comments/feed/">
-<link rel="alternate" type="application/rss+xml" title=" &raquo; mongodb Tag Feed" href="https://syncdown.github.io/tag/mongodb/feed/">
+<link rel="alternate" type="application/rss+xml" title=" &raquo; golang并发中的cond Comments Feed" href="https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/feed/">
 <script type="text/javascript">
 /* <![CDATA[ */
 window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/syncdown.github.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.5.4"}};
@@ -130,10 +130,15 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <script type="text/javascript" src="https://syncdown.github.io/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
 <script type="text/javascript" src="https://syncdown.github.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
 <link rel="https://api.w.org/" href="https://syncdown.github.io/wp-json/">
-<link rel="alternate" type="application/json" href="https://syncdown.github.io/wp-json/wp/v2/tags/15">
+<link rel="alternate" type="application/json" href="https://syncdown.github.io/wp-json/wp/v2/posts/212">
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://syncdown.github.io/xmlrpc.php?rsd">
 <meta name="generator" content="WordPress 6.5.4">
-<meta name="cdp-version" content="1.4.6">		<style type="text/css">.site-title,
+<link rel="canonical" href="https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/">
+<link rel="shortlink" href="https://syncdown.github.io/?p=212">
+<link rel="alternate" type="application/json+oembed" href="https://syncdown.github.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fhttps%3A%2F%2Fsyncdown.github.io%2Fgolang%25e5%25b9%25b6%25e5%258f%2591%25e4%25b8%25ad%25e7%259a%2584cond%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://syncdown.github.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fhttps%3A%2F%2Fsyncdown.github.io%2Fgolang%25e5%25b9%25b6%25e5%258f%2591%25e4%25b8%25ad%25e7%259a%2584cond%2F#038;format=xml">
+<meta name="cdp-version" content="1.4.6">
+<link rel="pingback" href="https://syncdown.github.io/xmlrpc.php">		<style type="text/css">.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px, 1px, 1px, 1px);
@@ -145,7 +150,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <meta name="msapplication-TileImage" content="https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-300x300.png">
 </head>
 
-<body class="archive tag tag-mongodb tag-15 hfeed has-sidebar no-sidebar">
+<body class="post-template-default single single-post postid-212 single-format-standard has-sidebar right-sidebar">
 
 
 <div id="page" class="site">
@@ -183,7 +188,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 				</button>
 
 				<ul id="primary-menu" class="nav-menu">
-<li id="menu-item-145" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-145"><a href="https://syncdown.github.io/category/%e6%8a%80%e6%9c%af/">技术</a></li>
+<li id="menu-item-145" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-145"><a href="https://syncdown.github.io/category/%e6%8a%80%e6%9c%af/">技术</a></li>
 <li id="menu-item-146" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-146"><a href="https://syncdown.github.io/category/%e5%86%b7%e7%9f%a5%e8%af%86/">冷知识</a></li>
 </ul>			</div>
 <!-- .container -->
@@ -196,37 +201,275 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 <div id="content-wrap" class="container">
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main">					
-			<div class="blog-archive columns-3 clear">
-									
-<article id="post-155" class="post-155 post type-post status-publish format-standard has-post-thumbnail hentry category-4 tag-mongodb tag-retool">
-	<div class="blog-post-item">
-					<div class="featured-image">
+		<main id="main" class="site-main">
+			<div class="single-post-wrap">
 				
-		<a class="post-thumbnail" href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" aria-hidden="true" tabindex="-1">
-			<img width="1432" height="1058" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="retool查询Mongodb Atlas" decoding="async" fetchpriority="high" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-36.png 1432w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-300x222.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-1024x757.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-36-768x567.png 768w" sizes="(max-width: 1432px) 100vw, 1432px">		</a>
+<article id="post-212" class="post-212 post type-post status-publish format-standard hentry category-4 tag-cond tag-golang">
+	<div class="blog-post-item">
+		
+        			<div class="entry-meta">
+				<span class="byline"> by: <span class="author vcard"><a class="url fn n" href="https://syncdown.github.io/author/zhenyu-chen/">Zhenyu Chen</a></span></span><span class="posted-on">Posted on: <a href="https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/" rel="bookmark"><time class="entry-date published" datetime="2024-06-11T06:29:06+00:00">June 11, 2024</time><time class="updated" datetime="2024-06-13T12:45:11+00:00">June 13, 2024</time></a></span>			</div>
+<!-- .entry-meta -->			
+		
+		<div class="entry-container">
+	        <header class="entry-header">
+				<h1 class="entry-title">golang并发中的cond</h1>			</header><!-- .entry-header -->
 
-					</div>
-<!-- .featured-image -->
-		        
-        <div class="entry-container">
-			<span class="cat-links"><a href="https://syncdown.github.io/category/%e6%8a%80%e6%9c%af/" rel="category tag">技术</a></span>
-			<header class="entry-header">
-				<h2 class="entry-title"><a href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" rel="bookmark">retool查询Mongodb Atlas</a></h2>			</header><!-- .entry-header -->
+			<div class="entry-content">
+				
+<p class="has-larger-font-size">概览</p>
 
-			<span class="posted-on">Posted on: <a href="https://syncdown.github.io/retool%e6%9f%a5%e8%af%a2mongodb-atlas/" rel="bookmark"><time class="entry-date published updated" datetime="2024-04-12T10:41:32+00:00">April 12, 2024</time></a></span>
-							<div class="entry-content">
-					<p>Mongodb Atlas可以托管一个免费的mongo实例，retool呢几乎也是免费的。 几分钟这俩就可以拼凑出一个简单的数据查询页面。 未完待续</p>
-				</div>
+
+
+<p>cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
+
+
+
+<p>event就是两个或两个以上的goroutine之间的任意信号。</p>
+
+
+
+<p>用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。</p>
+
+
+
+<p>使用场景的区别</p>
+
+
+
+<ul>
+<li>waitgroup：赛马等待发令枪</li>
+
+
+
+<li>cond:多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个</li>
+</ul>
+
+
+
+<p class="has-larger-font-size">cond中的Wait和Broadcast</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var shared = false
+
+func main() {
+	wg := sync.WaitGroup{}
+	// 构造cond对象，需要关联一把锁
+	c := sync.NewCond(&amp;sync.Mutex{})
+
+	// 两辆车在等红灯（两个协程读取共享变量）
+	for i := 0; i &lt; 2; i++ {
+		wg.Add(1)
+		go func(i int) {
+			c.L.Lock()
+			// 红灯的情况
+			// for !share{ 用for还是if，其实窦性，关键的是c.Wait()
+			if !shared {
+				fmt.Printf("time:%v goroutine %v wait\n", time.Now(), i)
+				c.Wait()
+			}
+			// 绿灯的情况
+			fmt.Printf("time:%v goroutine %v shared:%v\n", time.Now(), i, shared)
+			c.L.Unlock()
+			wg.Done()
+		}(i)
+	}
+
+	// 管理红绿灯的控制程序
+	time.Sleep(time.Second * 2)
+	c.L.Lock()
+	fmt.Printf("time:%v goroutine main ready\n", time.Now())
+	shared = true
+	c.Broadcast()
+	fmt.Printf("time:%v goroutine main broadcast\n", time.Now())
+	c.L.Unlock()
+
+	// 让main这个子弹飞一会，不然会直接退出
+	wg.Wait()
+
+}
+</pre>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="178" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png" alt="" class="wp-image-214" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-300x52.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-768x133.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4.png 1508w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<p><strong>两辆车一先一后在单行道上等待红灯，绿灯亮起后，先后读取到通行信号出发。</strong></p>
+
+
+
+<p>小结：</p>
+
+
+
+<ul>
+<li>cond需要关联一把锁，可以是Mutex也可是RWMutex</li>
+
+
+
+<li>不论是车还是红灯管理程序，读写共享变量都需要针对条件锁里面关联</li>
+
+
+
+<li>cond的Wait()，#车要等待</li>
+
+
+
+<li>cond的Broadcast() #红灯管理程序要广播，让车辆看得见。</li>
+</ul>
+
+
+
+<p class="has-larger-font-size">cond中的Wait和Signal</p>
+
+
+
+<p>场景类比，单个窗口的派对，协程通过共享变量的读取竞争来获得执行权，谁先得到谁执行。</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var shared = false
+
+func main() {
+	wg := sync.WaitGroup{}
+	c := sync.NewCond(&amp;sync.Mutex{})
+	for i := 0; i &lt; 2; i++ {
+		wg.Add(1)
+		go func(i int) {
+			c.L.Lock()
+			for !shared {
+				fmt.Printf("time:%v goroutine %v wait\n", time.Now(), i)
+				c.Wait()
+			}
+			fmt.Printf("time:%v goroutine %v shared:%v\n", time.Now(), i, shared)
+			c.L.Unlock()
+			wg.Done()
+		}(i)
+	}
+
+	for i := 0; i &lt; 2; i++ {
+		time.Sleep(time.Second * 2)
+		c.L.Lock()
+		fmt.Printf("time:%v main goroutine %v ready\n ", time.Now(), i)
+		shared = true
+		c.Signal()
+		fmt.Printf("time:%v main goroutine %v signal\n", time.Now(), i)
+		c.L.Unlock()
+	}
+
+	wg.Wait()
+}
+</pre>
+
+
+
+<p>结果</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="241" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png" alt="" class="wp-image-217" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-300x70.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-768x180.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5.png 1456w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<p>当监听的对象是队列的时候</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func main() {
+	c := sync.NewCond(&amp;sync.Mutex{})
+	// 长度为零，容量为10的切片
+	queue := make([]interface{}, 0, 10)
+
+	addToQueue := func() {
+		var i int
+		for {
+			c.L.Lock()
+			// 队列大于等于3的时候就会停住，只要小于3写入队列就会很快 #快入#
+			for len(queue) >= 3 {
+				fmt.Printf("the size of queue is %d\n", len(queue))
+				c.Wait()
+			}
+			fmt.Printf("Add to queue by %v\n", i)
+			queue = append(queue, i)
+			c.L.Unlock()
+			c.Signal()
+			i++
+		}
+	}
+
+	removeFromQueue := func(delay time.Duration) {
+		for {
+			time.Sleep(delay)
+			c.L.Lock()
+			removed := queue[0]
+			queue = queue[1:]
+			fmt.Printf("Removed %v from queue\n", removed)
+			c.L.Unlock()
+			c.Signal()
+		}
+	}
+
+	// 队列大于等于3的时候就会停住，只要小于3写入队列就会很快 #快入#
+	go addToQueue()
+
+	// 间隔一秒移除队列一项 #慢出#
+	go removeFromQueue(1 * time.Second)
+
+	var ch chan struct{}
+	&lt;-ch
+}
+</pre>
+
+
+
+<figure class="wp-block-image size-full"><img decoding="async" width="918" height="490" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png" alt="" class="wp-image-222" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png 918w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-300x160.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-768x410.png 768w" sizes="(max-width: 918px) 100vw, 918px"></figure>
+
+
+
+<p>因为队列是快入慢出的， 并且以3为阈值，大于等于3就停止写入。所以开始很快的写入队列三个数据，后来只能走一个进一个。</p>
+			</div>
 <!-- .entry-content -->
-					</div>
+
+			<footer class="entry-footer">
+				<span class="cat-links"><a href="https://syncdown.github.io/category/%e6%8a%80%e6%9c%af/" rel="category tag">技术</a></span>			</footer><!-- .entry-footer -->
+		</div>
 <!-- .entry-container -->
 	</div>
 <!-- .blog-post-item -->
-</article><!-- #post-155 -->			</div>
-<!-- .blog-archive -->
-
-					</main><!-- #main -->
+</article><!-- #post-212 -->
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://syncdown.github.io/golang%e4%b8%ad%e7%9a%84%e6%b7%b1%e6%8b%b7%e8%b4%9d/" rel="prev"><span class="screen-reader-text">Previous Post</span><span aria-hidden="true" class="nav-subtitle">Previous</span> <span class="nav-title"><span class="nav-title-icon-wrapper"><svg class="icon icon-arrow-left" aria-hidden="true" role="img"> <use href="#icon-arrow-left" xlink:href="#icon-arrow-left"></use> </svg></span>golang中的深拷贝</span></a></div></div>
+	</nav>			</div>
+<!-- .single-post-wrap -->
+		</main><!-- #main -->
 	</div>
 <!-- #primary -->
 
