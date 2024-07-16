@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/category/%E6%8A%80%E6%9C%AF/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Thu, 13 Jun 2024 12:45:11 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 16 Jul 2024 09:05:24 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5.4</generator>
+	<generator>https://wordpress.org/?v=6.5.5</generator>
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
@@ -28,6 +28,325 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>go中的defer</title>
+		<link>https://syncdown.github.io/go%e4%b8%ad%e7%9a%84defer/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Tue, 16 Jul 2024 07:25:58 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[defer]]></category>
+		<category><![CDATA[golang]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=242</guid>
+
+					<description><![CDATA[说起defer ， 用go进行开发的工程师肯定不会陌生。 粗浅的说，是用先进后出的方式，在方法返回的时刻进行执行statement的关键字。 官方文档：“A [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>说起defer ， 用go进行开发的工程师肯定不会陌生。 </p>
+
+
+
+<p>粗浅的说，是用先进后出的方式，在方法返回的时刻进行执行statement的关键字。 </p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p>官方文档：“A “defer” statement invokes a function whose execution is deferred to the moment the surrounding function returns, either because the surrounding function executed a return statement, reached the end of its function body, or because the corresponding goroutine is panicking.”<br>即函数返回、函数结束或者对应的goroutine发生panic时defer执行。</p>
+
+
+
+<p>关键词：surrounding function，returns，end of its function body, goroutine panicking</p>
+</blockquote>
+
+
+
+<p>确实，之前总是狭隘的认为就方法return的时刻，没有想到panic的情况， 是记不准确也不全面。 </p>
+
+
+
+<ol>
+<li>defer运行的时机</li>
+</ol>
+
+
+
+<ul>
+<li>说法一：defer的运行时机是方法返回结束之后，返回之前。</li>
+
+
+
+<li>说法二：既然是defer那么就有外围方法和当前方法的区别，是当前方法返回之后，外围方法执行之前。</li>
+
+
+
+<li>不管是哪种说法，写代码验证一下就好。</li>
+</ul>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import "fmt"
+
+func external() {
+	fmt.Println("external is starting")
+	internal()
+	fmt.Println("external is ending")
+}
+
+func internal() {
+	fmt.Println("internal is starting")
+	defer func() {
+		fmt.Println("internal defer is executing")
+	}()
+	fmt.Println("internal is ending")
+
+}
+func main() {
+	external()
+}
+</pre>
+
+
+
+<p>执行结果</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">external is starting
+internal is starting
+internal is ending
+internal defer is executing
+external is ending</pre>
+
+
+
+<p>defer执行的时机，<strong>是在当法return或语句结束之后，而在方法真正退出之前</strong>。</p>
+
+
+
+<p>2. 多个defer的执行顺序-后入先出。即LIFO</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    defer fmt.Println("main defer1")
+    test()
+    defer fmt.Println("main defer2")
+}
+
+func test() () {
+    defer func() {
+        fmt.Println("test defer1")
+    }()
+    defer func() {
+        fmt.Println("test defer2")
+    }()
+}
+</pre>
+
+
+
+<p>执行结果</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">test defer2
+test defer1
+main defer2
+main defer1</pre>
+
+
+
+<p>当多个defer的时候，就像栈一样，有压栈和出栈，其实是当前goroutine的defer链。执行的<strong>顺序是LIFO</strong>，最后压栈的会第一个执行。</p>
+
+
+
+<p>3.除了return，当出现panic的时候defer也会被触发执行。</p>
+
+
+
+<p>defer这个用处就非常大了，当然也得交代一下其他的背景。</p>
+
+
+
+<ul>
+<li><code>panic</code> 能够改变程序的控制流，调用 <code>panic</code> 后会立刻停止执行当前函数的剩余代码，并在当前 Goroutine 中递归执行调用<code>defer</code>；</li>
+
+
+
+<li><code>recover</code> 可以中止 <code>panic</code> 造成的程序崩溃。它是一个只能在 <code>defer</code> 中发挥作用的函数，在其他作用域中调用不会发挥作用；</li>
+</ul>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">func try(f func()) {
+    defer func() {
+        if err := recover(); err != nil {
+            fmt.Println("caught panic:", err)
+        }
+    }()
+    f()
+}</pre>
+
+
+
+<p>一般会封装一个<strong>try或者myRecover</strong>的方法，传入参数是自定义的方法。先defer后再执行自定义方法，recover一定要在defer中才能发挥作用。</p>
+
+
+
+<p>总结：</p>
+
+
+
+<ol>
+<li>defer的执行时机是方法return之后，真正退出之前。</li>
+
+
+
+<li>多个defer的顺序是LIFO，类似于栈。</li>
+
+
+
+<li>封装myRcover方法，传入参数是自定义方法。当自定义方法出现panic，在defer中会用recover中止程序崩溃。（<strong>defer机制的执行顺序决定了是自定义方法panic之后程序会捕获，recover起到了中止程序崩溃的作用</strong>）</li>
+</ol>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>保持人物一致性</title>
+		<link>https://syncdown.github.io/%e4%bf%9d%e6%8c%81%e4%ba%ba%e7%89%a9%e4%b8%80%e8%87%b4%e6%80%a7/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Wed, 26 Jun 2024 08:59:31 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[comfyui]]></category>
+		<category><![CDATA[人物一致性]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=230</guid>
+
+					<description><![CDATA[保持人物一致性有很多， 有的是图生图来保持一致性，有的是文生图来保持一致性。后者更无中生、天马行空一些。 关于文生图来保持人物一致性，这里说的思路是固定模型，固定种子的情况下，批量生成多张人物图片而保持一致性。 seed决定了图片的构图， 比如效果如下 [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>保持人物一致性有很多， 有的是图生图来保持一致性，有的是文生图来保持一致性。后者更无中生、天马行空一些。</p>
+
+
+
+<p>关于文生图来保持人物一致性，这里说的思路是固定模型，固定种子的情况下，批量生成多张人物图片而保持一致性。</p>
+
+
+
+<p>seed决定了图片的构图，</p>
+
+
+
+<p>比如效果如下</p>
+
+
+
+<ul>
+<li>模型：ArienmixxlAsian（主打亚洲人像脸部特征）</li>
+
+
+
+<li>vae：sdxl_vae.safetensors</li>
+
+
+
+<li>lora：lcm</li>
+
+
+
+<li>输入8个不同的表情</li>
+
+
+
+<li>用简单的几何形状构成的底图来绘制不同图片人物的大小和相对位置</li>
+</ul>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1004" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png" alt="" class="wp-image-232" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png 1004w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-294x300.png 294w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-768x784.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8.png 1182w" sizes="(max-width: 1004px) 100vw, 1004px" /></figure>
+
+
+
+<p>提示词prompt</p>
+
+
+
+<p>1girl</p>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img decoding="async" width="966" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png" alt="" class="wp-image-233" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png 966w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-283x300.png 283w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-768x814.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9.png 1124w" sizes="(max-width: 966px) 100vw, 966px" /></figure>
+
+
+
+<p>提示词prompt</p>
+
+
+
+<p>The image showcases a close-up portrait of a young woman with an ethereal appearance. She possesses long, dark hair that cascades down her shoulders and is adorned with what seems to be a sheer scarf or veil blending into the background. Her complexion is impeccable, complemented by subtle makeup featuring earthy tones on her eyelids and a soft peach hue on her lips. She rests her face gently in her hand, exuding serenity and poise.</p>
+</div>
+</div>
+
+
+
+<p>所以这个思路就是，通过不用表情及人物大小和头部位置做差异化， 保持seed和其他因子保持不变来保证人物一致性。</p>
+
+
+
+<h2 class="wp-block-heading">如何控制不同的面部表情</h2>
+
+
+
+<p>利用多行文本text multiline这个节点，每行输入一个表情描述，比如微笑、满足、激动、生气、烦乱、忧郁、焦虑、不安</p>
+
+
+
+<p>后面组成的prompt会用逗号分隔符把其他的拼接起来。不过话说，我确实没看出来这每张图片对应的表情，似乎都面无表情。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="528" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png" alt="" class="wp-image-235" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-300x155.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-768x396.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1536x792.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10.png 1560w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">如何控制每张图中的人物大小和相对位置</h2>
+
+
+
+<p>分别沿着x和y的方向，从0开始按照步长25进行遍历，最终是200，那么意味着总共8张图片（violet藕粉色的背景，星星图案），这里底图的数量8和表情数量要一致。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="500" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1024x500.png" alt="" class="wp-image-236" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1024x500.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-300x147.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-768x375.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1536x750.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11.png 1818w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">融合底图和提示词的主要流程</h2>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="392" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1024x392.png" alt="" class="wp-image-237" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1024x392.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-300x115.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-768x294.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1536x587.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-2048x783.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>golang并发中的cond</title>
 		<link>https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/</link>
 		
@@ -38,21 +357,21 @@
 		<category><![CDATA[golang]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=212</guid>
 
-					<description><![CDATA[概览 cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意信号。 用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。 使用场景的区别 [&#8230;]]]></description>
+					<description><![CDATA[概览 cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意事件信号。 用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。 使用场景的区别 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <p class="has-larger-font-size">概览</p>
 
 
 
-<p>cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
+<p>cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
 
 
 
-<p>event就是两个或两个以上的goroutine之间的任意信号。</p>
+<p>event就是两个或两个以上的goroutine之间的任意事件信号。</p>
 
 
 
-<p>用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。</p>
+<p>用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。</p>
 
 
 
@@ -61,11 +380,19 @@
 
 
 <ul>
-<li>waitgroup：赛马等待发令枪</li>
+<li>waitgroup：赛马等待发令枪，关心数量</li>
 
 
 
-<li>cond:多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个</li>
+<li>cond
+<ul>
+<li>broadcast赛马等待发令枪，但是不太关系赛马的数量。</li>
+
+
+
+<li>signal多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个，按照FIFO的顺序。</li>
+</ul>
+</li>
 </ul>
 
 
@@ -124,7 +451,7 @@ func main() {
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="178" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png" alt="" class="wp-image-214" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-300x52.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-768x133.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4.png 1508w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="178" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png" alt="" class="wp-image-214" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-4-1024x178.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-300x52.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4-768x133.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-4.png 1508w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -209,7 +536,7 @@ func main() {
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="241" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png" alt="" class="wp-image-217" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-300x70.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-768x180.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5.png 1456w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="241" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png" alt="" class="wp-image-217" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-5-1024x241.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-300x70.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5-768x180.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-5.png 1456w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -272,11 +599,80 @@ func main() {
 
 
 
-<figure class="wp-block-image size-full"><img decoding="async" width="918" height="490" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png" alt="" class="wp-image-222" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png 918w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-300x160.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-768x410.png 768w" sizes="(max-width: 918px) 100vw, 918px" /></figure>
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="918" height="490" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png" alt="" class="wp-image-222" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-6.png 918w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-300x160.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-6-768x410.png 768w" sizes="(max-width: 918px) 100vw, 918px" /></figure>
 
 
 
 <p>因为队列是快入慢出的， 并且以3为阈值，大于等于3就停止写入。所以开始很快的写入队列三个数据，后来只能走一个进一个。</p>
+
+
+
+<h2 class="wp-block-heading">cond的更合理的用法</h2>
+
+
+
+<ol>
+<li>把要监听的事件或者条件抽象成struct中的字段</li>
+
+
+
+<li>对业务处理方法作为参数传入到订阅方法里面，在独立的goroutine中，在合适的时机运行它</li>
+</ol>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type Button struct {
+	Clicked *sync.Cond
+	//  other attributes，当前演示的是Buttone的点击事件，当然可以有别的事件
+}
+
+func main() {
+	// 定义一个Button类型，包含一个clicked条件
+	button := Button{Clicked: sync.NewCond(&amp;sync.Mutex{})}
+	// 定义便利构造函数，允许注册函数监听信号，在合适的时机进行业务处理
+	// 每个处理程序都独立在自己的goroutine上，订阅不会退出，直到goroutine被确认运行为止
+	subscribe := func(c *sync.Cond, fn func()) {
+		var goroutineRunning sync.WaitGroup
+		goroutineRunning.Add(1)
+		go func() {
+			goroutineRunning.Done()
+			c.L.Lock()
+			defer c.L.Unlock()
+			c.Wait()
+			fn()
+		}()
+		goroutineRunning.Wait()
+	}
+
+	var clickRegistered sync.WaitGroup
+	clickRegistered.Add(3)
+	subscribe(button.Clicked, func() {
+		fmt.Println("Maximizing windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Displaying anyting in windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Mouse cliked")
+		clickRegistered.Done()
+	})
+	button.Clicked.Broadcast()
+	clickRegistered.Wait()
+}
+</pre>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 		
@@ -1026,7 +1422,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-2 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
 <figure class="wp-block-image size-full is-resized"><img loading="lazy" decoding="async" width="764" height="372" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png" alt="" class="wp-image-94" style="width:386px;height:auto" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-18.png 764w, https://syncdown.github.io/wp-content/uploads/2024/04/image-18-300x146.png 300w" sizes="(max-width: 764px) 100vw, 764px" /></figure>
 </div>
@@ -1288,7 +1684,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-2 wp-block-columns-is-layout-flex">
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
 <figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="522" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1024x522.png" alt="" class="wp-image-68" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1024x522.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-300x153.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-768x391.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5-1536x783.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/04/image-5.png 1550w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 </div>
@@ -1306,7 +1702,7 @@ func BenchmarkDeepCopyWithPointerByJson(b *testing.B) {
 
 
 
-<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3 wp-block-columns-is-layout-flex">
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-4 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
 <figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="649" src="https://syncdown.github.io/wp-content/uploads/2024/04/image-7-1024x649.png" alt="" class="wp-image-70" srcset="https://syncdown.github.io/wp-content/uploads/2024/04/image-7-1024x649.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7-300x190.png 300w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7-768x487.png 768w, https://syncdown.github.io/wp-content/uploads/2024/04/image-7.png 1410w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 </div>

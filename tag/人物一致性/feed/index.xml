@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>人物一致性</title>
+	<atom:link href="https://syncdown.github.io/tag/%E4%BA%BA%E7%89%A9%E4%B8%80%E8%87%B4%E6%80%A7/feed/" rel="self" type="application/rss+xml" />
+	<link>https://syncdown.github.io/</link>
+	<description></description>
+	<lastBuildDate>Tue, 02 Jul 2024 12:32:01 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.5.5</generator>
+
+<image>
+	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
+	<title>人物一致性</title>
+	<link>https://syncdown.github.io/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>保持人物一致性</title>
+		<link>https://syncdown.github.io/%e4%bf%9d%e6%8c%81%e4%ba%ba%e7%89%a9%e4%b8%80%e8%87%b4%e6%80%a7/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Wed, 26 Jun 2024 08:59:31 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[comfyui]]></category>
+		<category><![CDATA[人物一致性]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=230</guid>
+
+					<description><![CDATA[保持人物一致性有很多， 有的是图生图来保持一致性，有的是文生图来保持一致性。后者更无中生、天马行空一些。 关于文生图来保持人物一致性，这里说的思路是固定模型，固定种子的情况下，批量生成多张人物图片而保持一致性。 seed决定了图片的构图， 比如效果如下 [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>保持人物一致性有很多， 有的是图生图来保持一致性，有的是文生图来保持一致性。后者更无中生、天马行空一些。</p>
+
+
+
+<p>关于文生图来保持人物一致性，这里说的思路是固定模型，固定种子的情况下，批量生成多张人物图片而保持一致性。</p>
+
+
+
+<p>seed决定了图片的构图，</p>
+
+
+
+<p>比如效果如下</p>
+
+
+
+<ul>
+<li>模型：ArienmixxlAsian（主打亚洲人像脸部特征）</li>
+
+
+
+<li>vae：sdxl_vae.safetensors</li>
+
+
+
+<li>lora：lcm</li>
+
+
+
+<li>输入8个不同的表情</li>
+
+
+
+<li>用简单的几何形状构成的底图来绘制不同图片人物的大小和相对位置</li>
+</ul>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1004" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png" alt="" class="wp-image-232" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png 1004w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-294x300.png 294w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-768x784.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8.png 1182w" sizes="(max-width: 1004px) 100vw, 1004px" /></figure>
+
+
+
+<p>提示词prompt</p>
+
+
+
+<p>1girl</p>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-large"><img decoding="async" width="966" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png" alt="" class="wp-image-233" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png 966w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-283x300.png 283w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-768x814.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9.png 1124w" sizes="(max-width: 966px) 100vw, 966px" /></figure>
+
+
+
+<p>提示词prompt</p>
+
+
+
+<p>The image showcases a close-up portrait of a young woman with an ethereal appearance. She possesses long, dark hair that cascades down her shoulders and is adorned with what seems to be a sheer scarf or veil blending into the background. Her complexion is impeccable, complemented by subtle makeup featuring earthy tones on her eyelids and a soft peach hue on her lips. She rests her face gently in her hand, exuding serenity and poise.</p>
+</div>
+</div>
+
+
+
+<p>所以这个思路就是，通过不用表情及人物大小和头部位置做差异化， 保持seed和其他因子保持不变来保证人物一致性。</p>
+
+
+
+<h2 class="wp-block-heading">如何控制不同的面部表情</h2>
+
+
+
+<p>利用多行文本text multiline这个节点，每行输入一个表情描述，比如微笑、满足、激动、生气、烦乱、忧郁、焦虑、不安</p>
+
+
+
+<p>后面组成的prompt会用逗号分隔符把其他的拼接起来。不过话说，我确实没看出来这每张图片对应的表情，似乎都面无表情。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="528" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png" alt="" class="wp-image-235" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-300x155.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-768x396.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1536x792.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10.png 1560w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">如何控制每张图中的人物大小和相对位置</h2>
+
+
+
+<p>分别沿着x和y的方向，从0开始按照步长25进行遍历，最终是200，那么意味着总共8张图片（violet藕粉色的背景，星星图案），这里底图的数量8和表情数量要一致。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="500" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1024x500.png" alt="" class="wp-image-236" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1024x500.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-300x147.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-768x375.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11-1536x750.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-11.png 1818w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">融合底图和提示词的主要流程</h2>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="392" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1024x392.png" alt="" class="wp-image-237" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1024x392.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-300x115.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-768x294.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-1536x587.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-12-2048x783.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

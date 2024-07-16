@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/tag/cond/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Thu, 13 Jun 2024 12:45:11 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 20 Jun 2024 09:28:29 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5.4</generator>
+	<generator>https://wordpress.org/?v=6.5.5</generator>
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
@@ -38,21 +38,21 @@
 		<category><![CDATA[golang]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=212</guid>
 
-					<description><![CDATA[概览 cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意信号。 用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。 使用场景的区别 [&#8230;]]]></description>
+					<description><![CDATA[概览 cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意事件信号。 用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。 使用场景的区别 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <p class="has-larger-font-size">概览</p>
 
 
 
-<p>cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
+<p>cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
 
 
 
-<p>event就是两个或两个以上的goroutine之间的任意信号。</p>
+<p>event就是两个或两个以上的goroutine之间的任意事件信号。</p>
 
 
 
-<p>用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。</p>
+<p>用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。</p>
 
 
 
@@ -61,11 +61,19 @@
 
 
 <ul>
-<li>waitgroup：赛马等待发令枪</li>
+<li>waitgroup：赛马等待发令枪，关心数量</li>
 
 
 
-<li>cond:多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个</li>
+<li>cond
+<ul>
+<li>broadcast赛马等待发令枪，但是不太关系赛马的数量。</li>
+
+
+
+<li>signal多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个，按照FIFO的顺序。</li>
+</ul>
+</li>
 </ul>
 
 
@@ -277,6 +285,75 @@ func main() {
 
 
 <p>因为队列是快入慢出的， 并且以3为阈值，大于等于3就停止写入。所以开始很快的写入队列三个数据，后来只能走一个进一个。</p>
+
+
+
+<h2 class="wp-block-heading">cond的更合理的用法</h2>
+
+
+
+<ol>
+<li>把要监听的事件或者条件抽象成struct中的字段</li>
+
+
+
+<li>对业务处理方法作为参数传入到订阅方法里面，在独立的goroutine中，在合适的时机运行它</li>
+</ol>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type Button struct {
+	Clicked *sync.Cond
+	//  other attributes，当前演示的是Buttone的点击事件，当然可以有别的事件
+}
+
+func main() {
+	// 定义一个Button类型，包含一个clicked条件
+	button := Button{Clicked: sync.NewCond(&amp;sync.Mutex{})}
+	// 定义便利构造函数，允许注册函数监听信号，在合适的时机进行业务处理
+	// 每个处理程序都独立在自己的goroutine上，订阅不会退出，直到goroutine被确认运行为止
+	subscribe := func(c *sync.Cond, fn func()) {
+		var goroutineRunning sync.WaitGroup
+		goroutineRunning.Add(1)
+		go func() {
+			goroutineRunning.Done()
+			c.L.Lock()
+			defer c.L.Unlock()
+			c.Wait()
+			fn()
+		}()
+		goroutineRunning.Wait()
+	}
+
+	var clickRegistered sync.WaitGroup
+	clickRegistered.Add(3)
+	subscribe(button.Clicked, func() {
+		fmt.Println("Maximizing windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Displaying anyting in windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Mouse cliked")
+		clickRegistered.Done()
+	})
+	button.Clicked.Broadcast()
+	clickRegistered.Wait()
+}
+</pre>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 		

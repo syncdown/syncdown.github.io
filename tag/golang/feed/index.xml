@@ -12,13 +12,13 @@
 	<atom:link href="https://syncdown.github.io/tag/golang/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Thu, 13 Jun 2024 12:45:11 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 16 Jul 2024 09:05:24 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=6.5.4</generator>
+	<generator>https://wordpress.org/?v=6.5.5</generator>
 
 <image>
 	<url>https://syncdown.github.io/wp-content/uploads/2024/04/syncdown-150x150.png</url>
@@ -28,6 +28,202 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>go中的defer</title>
+		<link>https://syncdown.github.io/go%e4%b8%ad%e7%9a%84defer/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Tue, 16 Jul 2024 07:25:58 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[defer]]></category>
+		<category><![CDATA[golang]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=242</guid>
+
+					<description><![CDATA[说起defer ， 用go进行开发的工程师肯定不会陌生。 粗浅的说，是用先进后出的方式，在方法返回的时刻进行执行statement的关键字。 官方文档：“A [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>说起defer ， 用go进行开发的工程师肯定不会陌生。 </p>
+
+
+
+<p>粗浅的说，是用先进后出的方式，在方法返回的时刻进行执行statement的关键字。 </p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p>官方文档：“A “defer” statement invokes a function whose execution is deferred to the moment the surrounding function returns, either because the surrounding function executed a return statement, reached the end of its function body, or because the corresponding goroutine is panicking.”<br>即函数返回、函数结束或者对应的goroutine发生panic时defer执行。</p>
+
+
+
+<p>关键词：surrounding function，returns，end of its function body, goroutine panicking</p>
+</blockquote>
+
+
+
+<p>确实，之前总是狭隘的认为就方法return的时刻，没有想到panic的情况， 是记不准确也不全面。 </p>
+
+
+
+<ol>
+<li>defer运行的时机</li>
+</ol>
+
+
+
+<ul>
+<li>说法一：defer的运行时机是方法返回结束之后，返回之前。</li>
+
+
+
+<li>说法二：既然是defer那么就有外围方法和当前方法的区别，是当前方法返回之后，外围方法执行之前。</li>
+
+
+
+<li>不管是哪种说法，写代码验证一下就好。</li>
+</ul>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import "fmt"
+
+func external() {
+	fmt.Println("external is starting")
+	internal()
+	fmt.Println("external is ending")
+}
+
+func internal() {
+	fmt.Println("internal is starting")
+	defer func() {
+		fmt.Println("internal defer is executing")
+	}()
+	fmt.Println("internal is ending")
+
+}
+func main() {
+	external()
+}
+</pre>
+
+
+
+<p>执行结果</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">external is starting
+internal is starting
+internal is ending
+internal defer is executing
+external is ending</pre>
+
+
+
+<p>defer执行的时机，<strong>是在当法return或语句结束之后，而在方法真正退出之前</strong>。</p>
+
+
+
+<p>2. 多个defer的执行顺序-后入先出。即LIFO</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    defer fmt.Println("main defer1")
+    test()
+    defer fmt.Println("main defer2")
+}
+
+func test() () {
+    defer func() {
+        fmt.Println("test defer1")
+    }()
+    defer func() {
+        fmt.Println("test defer2")
+    }()
+}
+</pre>
+
+
+
+<p>执行结果</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">test defer2
+test defer1
+main defer2
+main defer1</pre>
+
+
+
+<p>当多个defer的时候，就像栈一样，有压栈和出栈，其实是当前goroutine的defer链。执行的<strong>顺序是LIFO</strong>，最后压栈的会第一个执行。</p>
+
+
+
+<p>3.除了return，当出现panic的时候defer也会被触发执行。</p>
+
+
+
+<p>defer这个用处就非常大了，当然也得交代一下其他的背景。</p>
+
+
+
+<ul>
+<li><code>panic</code> 能够改变程序的控制流，调用 <code>panic</code> 后会立刻停止执行当前函数的剩余代码，并在当前 Goroutine 中递归执行调用<code>defer</code>；</li>
+
+
+
+<li><code>recover</code> 可以中止 <code>panic</code> 造成的程序崩溃。它是一个只能在 <code>defer</code> 中发挥作用的函数，在其他作用域中调用不会发挥作用；</li>
+</ul>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">func try(f func()) {
+    defer func() {
+        if err := recover(); err != nil {
+            fmt.Println("caught panic:", err)
+        }
+    }()
+    f()
+}</pre>
+
+
+
+<p>一般会封装一个<strong>try或者myRecover</strong>的方法，传入参数是自定义的方法。先defer后再执行自定义方法，recover一定要在defer中才能发挥作用。</p>
+
+
+
+<p>总结：</p>
+
+
+
+<ol>
+<li>defer的执行时机是方法return之后，真正退出之前。</li>
+
+
+
+<li>多个defer的顺序是LIFO，类似于栈。</li>
+
+
+
+<li>封装myRcover方法，传入参数是自定义方法。当自定义方法出现panic，在defer中会用recover中止程序崩溃。（<strong>defer机制的执行顺序决定了是自定义方法panic之后程序会捕获，recover起到了中止程序崩溃的作用</strong>）</li>
+</ol>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>golang并发中的cond</title>
 		<link>https://syncdown.github.io/golang%e5%b9%b6%e5%8f%91%e4%b8%ad%e7%9a%84cond/</link>
 		
@@ -38,21 +234,21 @@
 		<category><![CDATA[golang]]></category>
 		<guid isPermaLink="false">https://syncdown.github.io/?p=212</guid>
 
-					<description><![CDATA[概览 cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意信号。 用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。 使用场景的区别 [&#8230;]]]></description>
+					<description><![CDATA[概览 cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。 event就是两个或两个以上的goroutine之间的任意事件信号。 用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。 使用场景的区别 [&#8230;]]]></description>
 										<content:encoded><![CDATA[
 <p class="has-larger-font-size">概览</p>
 
 
 
-<p>cond一定是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
+<p>cond应该是condition的缩写，它是goroutine的集合点，等待或发布一个event。</p>
 
 
 
-<p>event就是两个或两个以上的goroutine之间的任意信号。</p>
+<p>event就是两个或两个以上的goroutine之间的任意事件信号。</p>
 
 
 
-<p>用来解决多个读协程等待共享资源变成ready的场景，比如多辆车在单车道等红灯。想比于waitgroup，可以把waitgroup比作多匹赛马等待发令枪，马和马之间是竞赛、是并行的关系，而多辆车在单车道，是串行的关系，毕竟只有一个共享资源。</p>
+<p>用来解决多个读协程等待共享资源变成ready的场景，和waitgroup很像，如果把waitgroup比作多匹赛马等待发令枪，waitgroup十分关心数量，而cond关心的则是条件。</p>
 
 
 
@@ -61,11 +257,19 @@
 
 
 <ul>
-<li>waitgroup：赛马等待发令枪</li>
+<li>waitgroup：赛马等待发令枪，关心数量</li>
 
 
 
-<li>cond:多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个</li>
+<li>cond
+<ul>
+<li>broadcast赛马等待发令枪，但是不太关系赛马的数量。</li>
+
+
+
+<li>signal多辆车在单车道等红灯 或者 火车站的办事窗口-办完一个通知下一个，按照FIFO的顺序。</li>
+</ul>
+</li>
 </ul>
 
 
@@ -277,6 +481,75 @@ func main() {
 
 
 <p>因为队列是快入慢出的， 并且以3为阈值，大于等于3就停止写入。所以开始很快的写入队列三个数据，后来只能走一个进一个。</p>
+
+
+
+<h2 class="wp-block-heading">cond的更合理的用法</h2>
+
+
+
+<ol>
+<li>把要监听的事件或者条件抽象成struct中的字段</li>
+
+
+
+<li>对业务处理方法作为参数传入到订阅方法里面，在独立的goroutine中，在合适的时机运行它</li>
+</ol>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type Button struct {
+	Clicked *sync.Cond
+	//  other attributes，当前演示的是Buttone的点击事件，当然可以有别的事件
+}
+
+func main() {
+	// 定义一个Button类型，包含一个clicked条件
+	button := Button{Clicked: sync.NewCond(&amp;sync.Mutex{})}
+	// 定义便利构造函数，允许注册函数监听信号，在合适的时机进行业务处理
+	// 每个处理程序都独立在自己的goroutine上，订阅不会退出，直到goroutine被确认运行为止
+	subscribe := func(c *sync.Cond, fn func()) {
+		var goroutineRunning sync.WaitGroup
+		goroutineRunning.Add(1)
+		go func() {
+			goroutineRunning.Done()
+			c.L.Lock()
+			defer c.L.Unlock()
+			c.Wait()
+			fn()
+		}()
+		goroutineRunning.Wait()
+	}
+
+	var clickRegistered sync.WaitGroup
+	clickRegistered.Add(3)
+	subscribe(button.Clicked, func() {
+		fmt.Println("Maximizing windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Displaying anyting in windows")
+		clickRegistered.Done()
+	})
+	subscribe(button.Clicked, func() {
+		fmt.Println("Mouse cliked")
+		clickRegistered.Done()
+	})
+	button.Clicked.Broadcast()
+	clickRegistered.Wait()
+}
+</pre>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 		
