@@ -12,7 +12,7 @@
 	<atom:link href="https://syncdown.github.io/category/%E6%8A%80%E6%9C%AF/feed/" rel="self" type="application/rss+xml" />
 	<link>https://syncdown.github.io/</link>
 	<description></description>
-	<lastBuildDate>Tue, 16 Jul 2024 09:05:24 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 18 Jul 2024 12:23:05 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,119 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>方法中返回局部变量地址，方便和内存逃逸怎么选？</title>
+		<link>https://syncdown.github.io/%e6%96%b9%e6%b3%95%e4%b8%ad%e8%bf%94%e5%9b%9e%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e5%9c%b0%e5%9d%80%ef%bc%8c%e6%96%b9%e4%be%bf%e5%92%8c%e5%86%85%e5%ad%98%e9%80%83%e9%80%b8%e6%80%8e%e4%b9%88%e9%80%89/</link>
+		
+		<dc:creator><![CDATA[Zhenyu Chen]]></dc:creator>
+		<pubDate>Thu, 18 Jul 2024 12:23:05 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[golang]]></category>
+		<category><![CDATA[内存逃逸]]></category>
+		<guid isPermaLink="false">https://syncdown.github.io/?p=253</guid>
+
+					<description><![CDATA[在 Go 语言中，内存逃逸有好多种情况， 其中最常见的一种就是方法中返回了局部变量的地址。 内存逃逸是指在函数内部创建的变量，其生命周期超出了函数的范围，被分配到堆上而不是栈上。一般情况下，局部变量会被分配到栈上，函数执行结束后会自动释放栈空间。然而，如果函数返回了局部变量的地址，并且该地址在函数外部被使用，那么这个局部变量就不能在函数结束时被释放，因此需要将其分配到堆上，以保证其生命周期的延续性。 [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>在 Go 语言中，内存逃逸有好多种情况， 其中最常见的一种就是方法中返回了局部变量的地址。</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p>内存逃逸是指在函数内部创建的变量，其生命周期超出了函数的范围，被分配到堆上而不是栈上。一般情况下，局部变量会被分配到栈上，函数执行结束后会自动释放栈空间。然而，如果函数返回了局部变量的地址，并且该地址在函数外部被使用，那么这个局部变量就不能在函数结束时被释放，因此需要将其分配到堆上，以保证其生命周期的延续性。</p>
+</blockquote>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">func memoryLeak() *xyz {
+	return &amp;xyz{}
+}</pre>
+
+
+
+<p>原因就是因为返回的地址被方法外部所使用，那么这个局部变量就不能再函数结束的时候被释放，在编译时就将其分配到堆上，需要在运行时靠垃圾回收机制才能释放内存。</p>
+
+
+
+<p>那如果不返回地址，而是返回值类型变量，是不是就避免了内存逃逸问题呢？</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type myStructure struct {
+	Name    string
+	Surname string
+	Height  int32
+}
+
+// 引发内存逃逸
+func NewStructurePointer(n, s string, h int32) *myStructure {
+	if h > 300 {
+		h = 0
+	}
+	return &amp;myStructure{n, s, h}
+}
+
+// 返回值类型，避免内存逃逸
+func NewStructure(n, s string, h int32) myStructure {
+	if h > 300 {
+		h = 0
+	}
+	return myStructure{n, s, h}
+}</pre>
+
+
+
+<p>如果调用NewStructurePointer方法，编译的时候进行一下逃逸分析就知道了，(*s1).Name escapes to heap， 很明显会指出具体的变量会逃逸到堆中。 </p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="635" src="https://syncdown.github.io/wp-content/uploads/2024/07/image-1024x635.png" alt="" class="wp-image-254" srcset="https://syncdown.github.io/wp-content/uploads/2024/07/image-1024x635.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/07/image-300x186.png 300w, https://syncdown.github.io/wp-content/uploads/2024/07/image-768x477.png 768w, https://syncdown.github.io/wp-content/uploads/2024/07/image-1536x953.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/07/image.png 1834w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>如果调用NewStructure方法， 再来看一下。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="885" src="https://syncdown.github.io/wp-content/uploads/2024/07/image-1-1024x885.png" alt="" class="wp-image-255" srcset="https://syncdown.github.io/wp-content/uploads/2024/07/image-1-1024x885.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/07/image-1-300x259.png 300w, https://syncdown.github.io/wp-content/uploads/2024/07/image-1-768x664.png 768w, https://syncdown.github.io/wp-content/uploads/2024/07/image-1-1536x1327.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/07/image-1.png 1650w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>曾经一概而论NewStructPointer因为返回的是指针方便操作，而对它青睐有加。兜兜转转目前看上去还是NewStrcut返回值类型这样的方法签名更好一些，返璞归真，也更具备更好的可读性。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="290" src="https://syncdown.github.io/wp-content/uploads/2024/07/image-2-1024x290.png" alt="" class="wp-image-257" srcset="https://syncdown.github.io/wp-content/uploads/2024/07/image-2-1024x290.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/07/image-2-300x85.png 300w, https://syncdown.github.io/wp-content/uploads/2024/07/image-2-768x218.png 768w, https://syncdown.github.io/wp-content/uploads/2024/07/image-2.png 1404w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>结论：</p>
+
+
+
+<ol>
+<li>方法中的局部变量直接返回地址是会造成内存逃逸的。</li>
+
+
+
+<li>如果方法直接返回值类型的变量，就没有内存逃逸的风险。</li>
+
+
+
+<li>内存逃逸分析是编译阶段。</li>
+
+
+
+<li>内存释放是运行阶段的事情。</li>
+
+
+
+<li>相比于指针类型返回的方法，更建议平时写代码返回值类型的。避免内存逃逸，可读性也更好一些。</li>
+</ol>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>go中的defer</title>
 		<link>https://syncdown.github.io/go%e4%b8%ad%e7%9a%84defer/</link>
 		
@@ -276,7 +389,7 @@ main defer1</pre>
 
 <div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-1 wp-block-columns-is-layout-flex">
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1004" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png" alt="" class="wp-image-232" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png 1004w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-294x300.png 294w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-768x784.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8.png 1182w" sizes="(max-width: 1004px) 100vw, 1004px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1004" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png" alt="" class="wp-image-232" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-8-1004x1024.png 1004w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-294x300.png 294w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8-768x784.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-8.png 1182w" sizes="(max-width: 1004px) 100vw, 1004px" /></figure>
 
 
 
@@ -290,7 +403,7 @@ main defer1</pre>
 
 
 <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
-<figure class="wp-block-image size-large"><img decoding="async" width="966" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png" alt="" class="wp-image-233" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png 966w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-283x300.png 283w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-768x814.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9.png 1124w" sizes="(max-width: 966px) 100vw, 966px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="966" height="1024" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png" alt="" class="wp-image-233" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-9-966x1024.png 966w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-283x300.png 283w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9-768x814.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-9.png 1124w" sizes="(max-width: 966px) 100vw, 966px" /></figure>
 
 
 
@@ -320,7 +433,7 @@ main defer1</pre>
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="528" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png" alt="" class="wp-image-235" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-300x155.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-768x396.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1536x792.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10.png 1560w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="528" src="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png" alt="" class="wp-image-235" srcset="https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1024x528.png 1024w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-300x155.png 300w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-768x396.png 768w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10-1536x792.png 1536w, https://syncdown.github.io/wp-content/uploads/2024/06/image-10.png 1560w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
