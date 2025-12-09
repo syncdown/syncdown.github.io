@@ -77,5 +77,8 @@ jQuery(document).ready(function($) {
         $('html, body').animate({scrollTop: '0px'}, 800);
         return false;
     });
+
+    // Slick
+    $('#section-slider-posts').slick();
     
 });

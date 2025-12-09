@@ -4,10 +4,10 @@ Theme URI: https://www.kantipurthemes.com/downloads/cube-blog
 Author: Kantipur Themes
 Author URI: https://www.kantipurthemes.com/
 Description: Cube Blog is a simple, clean and responsive WordPress blog theme built by Kantipur Themes. This theme is perfect for youtube bloggers, travel blog, food blog, fashion blog and writers who need to create personal blog site with simple creative features and effects to make readers feel the pleasure of reading blog posts and articles.
-Version: 1.6
+Version: 1.8
 Requires at least: 5.1
 Requires PHP: 5.6
-Tested up to: 6.4
+Tested up to: 6.8
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cube-blog
@@ -2898,4 +2898,51 @@ body:not(.single) .blog-archive article:not(.has-post-thumbnail) .featured-image
 	.has-sidebar.left-sidebar #secondary {
 		float: left;
 	}
+}
+
+/*--------------------------------------------------------------
+# Search Block
+--------------------------------------------------------------*/
+.wp-block-search__inside-wrapper {
+    display: flex;
+    flex: auto;
+    flex-wrap: nowrap;
+    max-width: 100%;
+}
+
+.wp-block-search__button {
+    margin-left: 5px;
+}
+
+/*--------------------------------------------------------------
+# Slick buttons
+--------------------------------------------------------------*/
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+
+.slick-dots {
+    bottom: 25px;
+}
+
+.slick-dots li {
+    margin: 0 7px;
+    width: auto;
+    height: auto;
+}
+
+.slick-dots li button {
+	padding: 0;
+    background-color: #fff;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+}
+
+.slick-dots li.slick-active button {
+    background-color: #f37e7e;
+}
+
+.slick-dots li button:before {
+	display: none;
 }
